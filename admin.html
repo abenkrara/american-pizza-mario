@@ -175,17 +175,19 @@
                 console.error("Error fetching bookings:", e);
                 document.getElementById('connection-status').classList.add('hidden');
 
-                // Auto-diagnóstico
+                // Diagnóstico Profundo
+                let debugMsg = "";
                 try {
                     const debugRes = await fetch(API_URL.replace('/bookings', '/debug'));
-                    const debugInfo = await debugRes.json();
-                    if (!debugInfo.url_set || !debugInfo.key_set) {
-                        alert("⚠️ ERROR CRÍTICO DETECTADO ⚠️\n\nVercel NO tiene las claves de Supabase configuradas.\n\nPor favor, ve a Vercel > Settings > Environment Variables y añade:\n- NEXT_PUBLIC_SUPABASE_URL\n- NEXT_PUBLIC_SUPABASE_ANON_KEY");
-                        return;
+                    if (debugRes.ok) {
+                        const d = await debugRes.json();
+                        debugMsg = `\n\n--- DIAGNÓSTICO ---\nEnvironment: ${d.env.url_exists ? 'OK' : 'FALTA URL'} / ${d.env.key_exists ? 'OK' : 'FALTA KEY'}\nURL: ${d.env.url_prefix}\nConexión DB: ${d.connection.success ? 'EXITO' : 'FALLO'}\nError DB: ${d.connection.error || 'Ninguno'}`;
+                    } else {
+                        debugMsg = "\n\n(El diagnóstico también falló 500 - Posible error de librerías)";
                     }
-                } catch (d) { console.log("Debug check failed", d); }
+                } catch (d) { debugMsg = "\n\n(Error ejecutando diagnóstico)"; }
 
-                alert(`Error conectando con servidor: ${e.message}\n\nSi el problema persiste, revisa que el servidor esté online.`);
+                alert(`Error del Servidor: ${e.message}${debugMsg}\n\nPor favor, envía una captura de este mensaje.`);
             }
         }
 
