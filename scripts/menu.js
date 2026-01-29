@@ -60,8 +60,8 @@ function renderMenu() {
                 ${starPattern}
             </div>
             <!-- Red Bar content -->
-            <div class="flex-grow flex items-center justify-center -ml-16 md:-ml-24">
-                <h2 class="text-white text-3xl md:text-5xl font-display uppercase tracking-[0.2em] drop-shadow-md text-center w-full">Nuestro Menú</h2>
+            <div class="flex-grow flex items-center justify-center -ml-12 md:-ml-24">
+                <h2 class="text-white text-3xl md:text-5xl font-display font-bold uppercase tracking-[0.15em] text-center w-full">Nuestro Menú</h2>
             </div>
         </div>
 
@@ -112,8 +112,8 @@ function renderMenu() {
             <div class="bg-usa-blue w-28 md:w-40 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
                 ${starPattern}
             </div>
-            <div class="flex-grow flex items-center justify-center -ml-16 md:-ml-24">
-                <h2 class="text-white text-2xl md:text-4xl font-display uppercase tracking-widest text-center w-full">Pizza a tu gusto</h2>
+            <div class="flex-grow flex items-center justify-center -ml-12 md:-ml-24">
+                <h2 class="text-white text-3xl md:text-5xl font-display font-bold uppercase tracking-[0.15em] text-center w-full">Pizza a tu gusto</h2>
             </div>
         </div>
 
@@ -163,8 +163,8 @@ function renderMenu() {
             <div class="bg-usa-blue w-24 md:w-32 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
                 ${starPattern}
             </div>
-            <div class="flex-grow flex items-center justify-center -ml-12">
-                <h2 class="text-white text-3xl md:text-4xl font-display uppercase tracking-[0.2em] text-center w-full">Aperitivos</h2>
+            <div class="flex-grow flex items-center justify-center -ml-12 md:-ml-24">
+                <h2 class="text-white text-3xl md:text-5xl font-display font-bold uppercase tracking-[0.15em] text-center w-full">Aperitivos</h2>
             </div>
         </div>
         <div class="p-8 bg-white">
