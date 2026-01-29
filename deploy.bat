@@ -4,10 +4,10 @@ echo ==========================================
 echo   LANZANDO DESPLIEGUE A VERCEL (CMD)
 echo ==========================================
 echo.
-echo 1. Intentando ejecutar Vercel...
+echo 1. Intentando ejecutar Vercel (PRODUCCION)...
 echo.
 
-call npx vercel
+call npx vercel --prod
 
 echo.
 echo ==========================================
