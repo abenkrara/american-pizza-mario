@@ -46,7 +46,7 @@
                 <button onclick="closeBookingModal()"
                     class="flex-1 bg-gray-300 text-gray-800 font-bold py-2 rounded hover:bg-gray-400 transition">Cancelar</button>
                 <button onclick="confirmBooking()"
-                    class="flex-1 bg-usa-blue text-white font-bold py-2 rounded hover:bg-blue-800 transition">Confirmar</button>
+                    class="flex-1 bg-blue-700 text-white font-bold py-2 rounded hover:bg-blue-800 transition shadow-md">Confirmar</button>
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@
             <div class="max-w-7xl mx-auto flex justify-between items-center">
                 <div class="flex items-center">
                     <span class="font-bold text-xl uppercase tracking-wider">APM Admin</span>
-                    <span class="ml-4 bg-green-600 text-white px-2 py-0.5 rounded text-xs">ONLINE</span>
+                    <span class="ml-4 bg-green-600 text-white px-2 py-0.5 rounded text-xs">VERSIÓN 3.6 (FIXED)</span>
                 </div>
                 <div class="flex items-center gap-4">
                     <span id="connection-status" class="text-xs bg-green-500 px-2 py-1 rounded hidden">Conectado</span>
@@ -65,6 +65,52 @@
                 </div>
             </div>
         </nav>
+
+<!-- SKIPPING LINES FOR BREVITY IN REPLACEMENT, targeting the function below -->
+
+        <script>
+        // ... (existing code)
+        
+        async function confirmBooking() {
+            const name = document.getElementById('booking-name').value;
+            const pax = document.getElementById('booking-pax').value;
+            const date = document.getElementById('admin-date').value;
+            const time = document.getElementById('admin-time').value;
+
+            if (!name) {
+                alert("Por favor, introduce un nombre.");
+                return;
+            }
+
+            try {
+                const res = await fetch(API_URL + '/reserve', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: name,
+                        phone: 'Local/Admin',
+                        email: '',
+                        date: date,
+                        time: time,
+                        pax: parseInt(pax),
+                        forceTableId: currentSelectedTable
+                    })
+                });
+
+                const result = await res.json();
+
+                if (!res.ok || !result.success) {
+                    throw new Error(result.message || "Error del servidor");
+                }
+
+                closeBookingModal();
+                refreshDashboard();
+
+            } catch (e) {
+                console.error(e);
+                alert("Error al guardar reserva: " + e.message);
+            }
+        }
 
         <div class="max-w-7xl mx-auto px-4 py-8">
 
