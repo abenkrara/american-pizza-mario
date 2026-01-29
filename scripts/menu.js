@@ -37,14 +37,14 @@ function renderMenu() {
     const container = document.getElementById('menu-container');
     let html = '';
 
-    // Helper for Star Pattern (Extra Sharp 5-point stars)
-    const sharpStarSvg = `<svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full"><polygon points="12 1 14.2 9.5 23 9.5 16 14.5 18.5 23 12 18 5.5 23 8 14.5 1 9.5 9.8 9.5" /></svg>`;
+    // Helper for Star Pattern (Rounded standard stars)
+    const starSvg = `<svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
 
     const starPattern = `
         <div class="relative w-full h-full">
-            <div class="absolute text-white w-8 h-8 md:w-16 md:h-16 top-[-10px] left-[-5px] transform -rotate-12">${sharpStarSvg}</div>
-            <div class="absolute text-white w-6 h-6 md:w-8 md:h-8 top-[45px] left-[25px] transform rotate-12">${sharpStarSvg}</div>
-            <div class="absolute text-white w-5 h-5 md:w-8 md:h-8 top-[5px] left-[65px] transform -rotate-6">${sharpStarSvg}</div>
+            <div class="absolute text-white w-8 h-8 md:w-16 md:h-16 top-[-5px] left-[-5px] transform -rotate-12">${starSvg}</div>
+            <div class="absolute text-white w-6 h-6 md:w-8 md:h-8 top-[40px] left-[25px] transform rotate-12">${starSvg}</div>
+            <div class="absolute text-white w-5 h-5 md:w-8 md:h-8 top-[10px] left-[60px] transform -rotate-6">${starSvg}</div>
         </div>
     `;
 
@@ -55,8 +55,8 @@ function renderMenu() {
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white">
         <div class="flex border-b-4 border-gray-900 h-20 md:h-24">
-            <!-- Blue Corner -->
-            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden clip-path-slant-right">
+            <!-- Blue Corner with Diagonal Cut -->
+            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);">
                 ${starPattern}
             </div>
             <!-- Red Bar -->
@@ -109,7 +109,7 @@ function renderMenu() {
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12">
         <div class="flex border-b-4 border-gray-900 h-20 md:h-24">
-            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden clip-path-slant-right">
+            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);">
                 ${starPattern}
             </div>
             <div class="bg-usa-red flex-grow flex items-center justify-center">
@@ -160,7 +160,7 @@ function renderMenu() {
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12 mb-24">
         <div class="flex border-b-4 border-gray-900 h-16 md:h-20">
-            <div class="bg-usa-blue w-24 md:w-32 relative overflow-hidden clip-path-slant-right">
+            <div class="bg-usa-blue w-24 md:w-32 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);">
                 ${starPattern}
             </div>
             <div class="bg-usa-red flex-grow flex items-center justify-center">
