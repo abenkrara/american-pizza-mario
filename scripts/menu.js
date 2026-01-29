@@ -42,9 +42,12 @@ function renderMenu() {
 
     const starPattern = `
         <div class="relative w-full h-full">
-            <div class="absolute text-white w-8 h-8 md:w-16 md:h-16 top-[-5px] left-[-5px] transform -rotate-12">${starSvg}</div>
-            <div class="absolute text-white w-6 h-6 md:w-8 md:h-8 top-[40px] left-[25px] transform rotate-12">${starSvg}</div>
-            <div class="absolute text-white w-5 h-5 md:w-8 md:h-8 top-[10px] left-[60px] transform -rotate-6">${starSvg}</div>
+            <!-- Large Star (Top Left) -->
+            <div class="absolute text-white w-8 h-8 md:w-14 md:h-14 top-[-2px] left-[-2px] transform -rotate-[15deg]">${starSvg}</div>
+            <!-- Medium Star (Right) -->
+            <div class="absolute text-white w-6 h-6 md:w-9 md:h-9 top-[6px] left-[35px] md:left-[55px] transform rotate-[10deg]">${starSvg}</div>
+            <!-- Small Star (Bottom) -->
+            <div class="absolute text-white w-5 h-5 md:w-7 md:h-7 top-[32px] md:top-[50px] left-[10px] md:left-[15px] transform -rotate-[5deg]">${starSvg}</div>
         </div>
     `;
 
