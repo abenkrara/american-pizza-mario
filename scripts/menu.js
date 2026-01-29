@@ -37,14 +37,14 @@ function renderMenu() {
     const container = document.getElementById('menu-container');
     let html = '';
 
-    // Helper for Star Pattern (Rounded standard stars)
+    // Helper for Star Pattern - Matching original menu design
     const starSvg = `<svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
 
     const starPattern = `
-        <div class="relative w-full h-full">
-            <div class="absolute text-white w-8 h-8 md:w-16 md:h-16 top-[-5px] left-[-5px] transform -rotate-12">${starSvg}</div>
-            <div class="absolute text-white w-6 h-6 md:w-8 md:h-8 top-[40px] left-[25px] transform rotate-12">${starSvg}</div>
-            <div class="absolute text-white w-5 h-5 md:w-8 md:h-8 top-[10px] left-[60px] transform -rotate-6">${starSvg}</div>
+        <div class="relative w-full h-full flex items-center justify-start pl-2">
+            <div class="text-white w-5 h-5 md:w-8 md:h-8 mr-1">${starSvg}</div>
+            <div class="text-white w-4 h-4 md:w-6 md:h-6 mr-1">${starSvg}</div>
+            <div class="text-white w-3 h-3 md:w-5 md:h-5">${starSvg}</div>
         </div>
     `;
 
@@ -54,9 +54,9 @@ function renderMenu() {
     // ================= SECCIÓN PIZZAS =================
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white">
-        <div class="flex border-b-4 border-gray-900 h-20 md:h-24">
-            <!-- Blue Corner with Diagonal Cut -->
-            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);">
+        <div class="flex border-b-4 border-gray-900 h-20 md:h-24 overflow-hidden">
+            <!-- Blue Corner with Stars -->
+            <div class="bg-usa-blue w-20 md:w-28 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);">
                 ${starPattern}
             </div>
             <!-- Red Bar -->
@@ -108,8 +108,8 @@ function renderMenu() {
     // ================= SECCIÓN CUSTOM PIZZA =================
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12">
-        <div class="flex border-b-4 border-gray-900 h-20 md:h-24">
-            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);">
+        <div class="flex border-b-4 border-gray-900 h-20 md:h-24 overflow-hidden">
+            <div class="bg-usa-blue w-20 md:w-28 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);">
                 ${starPattern}
             </div>
             <div class="bg-usa-red flex-grow flex items-center justify-center">
@@ -159,8 +159,8 @@ function renderMenu() {
     // ================= SECCIÓN APERITIVOS =================
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12 mb-24">
-        <div class="flex border-b-4 border-gray-900 h-16 md:h-20">
-            <div class="bg-usa-blue w-24 md:w-32 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);">
+        <div class="flex border-b-4 border-gray-900 h-16 md:h-20 overflow-hidden">
+            <div class="bg-usa-blue w-20 md:w-28 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);">
                 ${starPattern}
             </div>
             <div class="bg-usa-red flex-grow flex items-center justify-center">
