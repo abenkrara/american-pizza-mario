@@ -56,7 +56,7 @@ function renderMenu() {
     <div class="shadow-2xl border-4 border-gray-900 bg-white">
         <div class="flex border-b-4 border-gray-900 h-20 md:h-24">
             <!-- Blue Corner with Diagonal Cut -->
-            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);">
+            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
                 ${starPattern}
             </div>
             <!-- Red Bar -->
@@ -109,7 +109,7 @@ function renderMenu() {
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12">
         <div class="flex border-b-4 border-gray-900 h-20 md:h-24">
-            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);">
+            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
                 ${starPattern}
             </div>
             <div class="bg-usa-red flex-grow flex items-center justify-center">
@@ -160,7 +160,7 @@ function renderMenu() {
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12 mb-24">
         <div class="flex border-b-4 border-gray-900 h-16 md:h-20">
-            <div class="bg-usa-blue w-24 md:w-32 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);">
+            <div class="bg-usa-blue w-24 md:w-32 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
                 ${starPattern}
             </div>
             <div class="bg-usa-red flex-grow flex items-center justify-center">
