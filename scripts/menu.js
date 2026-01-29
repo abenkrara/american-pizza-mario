@@ -159,23 +159,23 @@ function renderMenu() {
     // ================= SECCIÓN APERITIVOS =================
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12 mb-24">
-        <div class="flex border-b-4 border-gray-900 h-16 md:h-20">
-            <div class="bg-usa-blue w-24 md:w-32 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
+        <div class="flex border-b-4 border-gray-900 h-16 md:h-20 overflow-hidden bg-usa-red">
+            <div class="bg-usa-blue w-24 md:w-32 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
                 ${starPattern}
             </div>
-            <div class="bg-usa-red flex-grow flex items-center justify-center">
-                <h2 class="text-white text-3xl md:text-4xl font-display uppercase tracking-[0.2em]">Aperitivos</h2>
+            <div class="flex-grow flex items-center justify-center -ml-12">
+                <h2 class="text-white text-3xl md:text-4xl font-display uppercase tracking-[0.2em] text-center w-full">Aperitivos</h2>
             </div>
         </div>
-        <div class="p-6 bg-white">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="p-8 bg-white">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4">
     `;
 
     menuData.aperitivos.forEach(item => {
         html += `
-        <div class="text-center group">
-            <h3 class="font-display font-bold text-gray-900 uppercase text-xl mb-1 group-hover:text-usa-red transition">${item.name}</h3>
-            <p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2">${item.ingredients}</p>
+        <div class="group border-b border-gray-100 last:border-0 pb-2">
+            <h3 class="font-display font-bold text-gray-900 uppercase text-lg md:text-xl leading-none mb-1 group-hover:text-usa-red transition">${item.name}</h3>
+            <p class="text-xs text-gray-500 font-bold uppercase tracking-wider">${item.ingredients}</p>
         </div>`;
     });
 
