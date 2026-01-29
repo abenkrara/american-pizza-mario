@@ -37,15 +37,14 @@ function renderMenu() {
     const container = document.getElementById('menu-container');
     let html = '';
 
-    // Helper for Star Pattern - Matching original menu design exactly
+    // Helper for Star Pattern (Rounded standard stars)
     const starSvg = `<svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
 
-    // Stars scattered at different heights like in the original printed menu
     const starPattern = `
-        <div class="relative w-full h-full overflow-visible">
-            <div class="absolute text-white w-6 h-6 md:w-10 md:h-10 top-[2px] left-[2px] transform -rotate-6">${starSvg}</div>
-            <div class="absolute text-white w-5 h-5 md:w-8 md:h-8 top-[12px] md:top-[16px] left-[22px] md:left-[32px] transform rotate-12">${starSvg}</div>
-            <div class="absolute text-white w-4 h-4 md:w-6 md:h-6 bottom-[4px] left-[6px] transform -rotate-12">${starSvg}</div>
+        <div class="relative w-full h-full">
+            <div class="absolute text-white w-6 h-6 md:w-10 md:h-10 top-[5px] left-[5px] transform -rotate-12">${starSvg}</div>
+            <div class="absolute text-white w-4 h-4 md:w-6 md:h-6 top-[35px] left-[20px] transform rotate-12 opacity-90">${starSvg}</div>
+            <div class="absolute text-white w-3 h-3 md:w-5 md:h-5 top-[10px] left-[50px] transform -rotate-6 opacity-80">${starSvg}</div>
         </div>
     `;
 
@@ -55,9 +54,9 @@ function renderMenu() {
     // ================= SECCIÓN PIZZAS =================
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white">
-        <div class="flex border-b-4 border-gray-900 h-20 md:h-24 overflow-hidden">
-            <!-- Blue Corner with Stars -->
-            <div class="bg-usa-blue w-24 md:w-36 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 55% 100%, 0 100%);">
+        <div class="flex border-b-4 border-gray-900 h-20 md:h-24 relative overflow-hidden bg-usa-red">
+            <!-- Blue Corner with Diagonal Cut -->
+            <div class="absolute top-0 left-0 h-full w-32 md:w-48 bg-usa-blue z-10" style="clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);">
                 ${starPattern}
             </div>
             <!-- Red Bar -->
@@ -109,11 +108,12 @@ function renderMenu() {
     // ================= SECCIÓN CUSTOM PIZZA =================
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12">
-        <div class="flex border-b-4 border-gray-900 h-20 md:h-24 overflow-hidden">
-            <div class="bg-usa-blue w-24 md:w-36 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 55% 100%, 0 100%);">
+    <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12">
+        <div class="flex border-b-4 border-gray-900 h-20 md:h-24 relative overflow-hidden bg-usa-red">
+            <div class="absolute top-0 left-0 h-full w-32 md:w-48 bg-usa-blue z-10" style="clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);">
                 ${starPattern}
             </div>
-            <div class="bg-usa-red flex-grow flex items-center justify-center">
+            <div class="flex-grow flex items-center justify-center relative z-0 pl-16">
                 <h2 class="text-white text-2xl md:text-4xl font-display uppercase tracking-widest text-center">Pizza a tu gusto</h2>
             </div>
         </div>
@@ -160,11 +160,12 @@ function renderMenu() {
     // ================= SECCIÓN APERITIVOS =================
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12 mb-24">
-        <div class="flex border-b-4 border-gray-900 h-16 md:h-20 overflow-hidden">
-            <div class="bg-usa-blue w-24 md:w-36 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 55% 100%, 0 100%);">
+    <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12 mb-24">
+        <div class="flex border-b-4 border-gray-900 h-16 md:h-20 relative overflow-hidden bg-usa-red">
+            <div class="absolute top-0 left-0 h-full w-24 md:w-36 bg-usa-blue z-10" style="clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);">
                 ${starPattern}
             </div>
-            <div class="bg-usa-red flex-grow flex items-center justify-center">
+            <div class="flex-grow flex items-center justify-center relative z-0 pl-16">
                 <h2 class="text-white text-3xl md:text-4xl font-display uppercase tracking-[0.2em]">Aperitivos</h2>
             </div>
         </div>
