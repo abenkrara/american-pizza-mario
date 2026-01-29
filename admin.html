@@ -17,7 +17,7 @@
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full text-center">
             <h2 class="text-2xl font-bold mb-4 text-gray-800">Acceso Dueños</h2>
             <input type="password" id="password-input" placeholder="Contraseña (admin)"
-                class="w-full px-4 py-2 border rounded mb-4">
+                class="w-full px-4 py-2 border rounded mb-4" onkeypress="handleEnter(event)">
             <button onclick="checkAuth()" class="w-full bg-blue-900 text-white font-bold py-2 rounded">Entrar</button>
             <p id="login-error" class="text-red-500 text-sm mt-2 hidden">Contraseña incorrecta</p>
         </div>
@@ -57,7 +57,8 @@
             <div class="max-w-7xl mx-auto flex justify-between items-center">
                 <div class="flex items-center">
                     <span class="font-bold text-xl uppercase tracking-wider">APM Admin</span>
-                    <span class="ml-4 bg-green-600 text-white px-2 py-0.5 rounded text-xs">VERSIÓN 3.8 (FINAL)</span>
+                    <span class="ml-4 bg-purple-600 text-white px-2 py-0.5 rounded text-xs">VERSIÓN 3.9
+                        (REPAIRED)</span>
                 </div>
                 <div class="flex items-center gap-4">
                     <span id="connection-status" class="text-xs bg-green-500 px-2 py-1 rounded hidden">Conectado</span>
@@ -66,56 +67,68 @@
             </div>
         </nav>
 
-        <select id="admin-time" class="w-full border p-2 rounded" onchange="refreshDashboard()">
-            <option value="17:30">17:30</option>
-            <option value="18:00">18:00</option>
-            <option value="18:30">18:30</option>
-            <option value="19:00">19:00</option>
-            <option value="19:30">19:30</option>
-            <option value="20:00">20:00</option>
-            <option value="20:30">20:30</option>
-            <option value="21:00">21:00</option>
-            <option value="21:30">21:30</option>
-            <option value="22:00">22:00</option>
-            <option value="22:30">22:30</option>
-            <option value="23:00">23:00</option>
-        </select>
-    </div>
-    <button onclick="refreshDashboard()" class="bg-usa-blue text-white px-6 py-2 rounded font-bold hover:bg-gray-800">
-        <i class="fas fa-sync"></i> Refrescar
-    </button>
-    </div>
+        <div class="max-w-7xl mx-auto px-4 py-8">
 
-    <!-- GESTIÓN VISUAL DE MESAS -->
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">Estado de Mesas (Tiempo Real)</h2>
+            <!-- CONTROLES DE FECHA Y HORA -->
+            <div class="bg-white p-6 rounded-xl shadow-md mb-8 flex flex-col md:flex-row gap-6 items-end">
+                <div class="flex-1 w-full">
+                    <label class="block text-gray-700 font-bold mb-2">Fecha Gestión</label>
+                    <input type="date" id="admin-date" class="w-full border p-2 rounded" onchange="refreshDashboard()">
+                </div>
+                <div class="flex-1 w-full">
+                    <label class="block text-gray-700 font-bold mb-2">Turno / Hora</label>
+                    <select id="admin-time" class="w-full border p-2 rounded" onchange="refreshDashboard()">
+                        <option value="17:30">17:30</option>
+                        <option value="18:00">18:00</option>
+                        <option value="18:30">18:30</option>
+                        <option value="19:00">19:00</option>
+                        <option value="19:30">19:30</option>
+                        <option value="20:00">20:00</option>
+                        <option value="20:30">20:30</option>
+                        <option value="21:00">21:00</option>
+                        <option value="21:30">21:30</option>
+                        <option value="22:00">22:00</option>
+                        <option value="22:30">22:30</option>
+                        <option value="23:00">23:00</option>
+                    </select>
+                </div>
+                <button onclick="refreshDashboard()"
+                    class="bg-blue-900 text-white px-6 py-2 rounded font-bold hover:bg-blue-800 transition">
+                    <i class="fas fa-sync-alt mr-2"></i> Refrescar
+                </button>
+            </div>
 
-    <!-- Grid Container Directo -->
-    <div id="tables-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12"></div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Estado de Mesas (Tiempo Real)</h2>
 
-    <!-- LISTADO DETALLADO -->
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">Listado de Reservas</h2>
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-        <table class="min-w-full leading-normal">
-            <thead>
-                <tr>
-                    <th
-                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Mesa</th>
-                    <th
-                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Cliente</th>
-                    <th
-                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Pax</th>
-                    <th
-                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="bookings-table-body"></tbody>
-        </table>
-    </div>
-    </div>
+            <!-- GRID MESAS -->
+            <div id="tables-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+                <!-- Se rellena con JS -->
+            </div>
+
+            <!-- LISTADO DETALLADO -->
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Listado de Reservas</h2>
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <table class="min-w-full leading-normal">
+                    <thead>
+                        <tr>
+                            <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Mesa</th>
+                            <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Cliente</th>
+                            <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Pax</th>
+                            <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookings-table-body"></tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <!-- Script -->
@@ -124,6 +137,10 @@
 
         // Init
         document.getElementById('admin-date').value = new Date().toISOString().split('T')[0];
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') checkAuth();
+        }
 
         function checkAuth() {
             const pass = document.getElementById('password-input').value;
@@ -143,6 +160,7 @@
             const time = document.getElementById('admin-time').value;
 
             try {
+                // Use relative path for robustness
                 const res = await fetch(API_URL + '/bookings');
 
                 if (!res.ok) {
@@ -172,20 +190,19 @@
             grid.innerHTML = '';
 
             for (let i = 1; i <= 6; i++) {
-                const booking = bookings.find(b => b.tableId === i);
+                const booking = bookings.find(b => (b.tableId || b.table_id) === i);
                 const isOccupied = !!booking;
 
                 const div = document.createElement('div');
-                div.className = `p-6 rounded-xl shadow-lg border-2 flex flex-col items-center justify-center cursor-pointer transition transform hover:scale-105 active:scale-95 h-40 relative 
-                    ${isOccupied ? 'bg-red-50 border-red-500' : 'bg-green-50 border-green-500'}`;
+                div.className = `p-4 rounded-xl border-2 cursor-pointer transition relative flex flex-col items-center justify-center h-32 ${isOccupied ? 'border-red-500 bg-red-50' : 'border-green-500 bg-green-50 hover:bg-green-100'}`;
 
                 div.onclick = () => toggleTable(i, booking);
 
                 div.innerHTML = `
-                    <p class="font-bold text-xl mb-2 ${isOccupied ? 'text-red-700' : 'text-green-700'}">MESA ${i}</p>
+                    <span class="font-bold text-gray-700 mb-2 ${isOccupied ? 'text-red-700' : 'text-green-700'}">MESA ${i}</span>
                     ${isOccupied ?
-                        `<i class="fas fa-user-lock text-3xl text-red-500 mb-2"></i>
-                         <p class="text-xs font-bold text-center text-red-600 truncate w-full px-2">${booking.name}</p>`
+                        `<i class="fas fa-user-check text-2xl text-red-500 mb-1"></i>
+                         <p class="text-xs font-bold text-red-600 truncate w-full text-center">${booking.name}</p>`
                         :
                         `<i class="fas fa-check-circle text-3xl text-green-500 mb-2"></i>
                          <p class="text-xs font-bold text-green-600">Libre</p>`
@@ -209,7 +226,7 @@
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <span class="font-bold text-lg bg-gray-200 px-3 py-1 rounded">Mesa ${b.tableId}</span>
+                        <span class="font-bold text-lg bg-gray-200 px-3 py-1 rounded">Mesa ${b.tableId || b.table_id}</span>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <p class="text-gray-900 font-bold">${b.name}</p>
@@ -291,39 +308,33 @@
             }
         }
 
-        async function confirmBooking() {
-            const name = document.getElementById('booking-name').value;
-            const pax = document.getElementById('booking-pax').value;
-            const date = document.getElementById('admin-date').value;
-            const time = document.getElementById('admin-time').value;
+        if (!name) {
+            alert("Por favor, introduce un nombre.");
+            return;
+        }
 
-            if (!name) {
-                alert("Por favor, introduce un nombre.");
-                return;
-            }
+        try {
+            await fetch(API_URL + '/reserve', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: name,
+                    phone: 'Local/Admin', // Mark as admin booking
+                    email: '',
+                    date: date,
+                    time: time,
+                    pax: parseInt(pax),
+                    forceTableId: currentSelectedTable
+                })
+            });
 
-            try {
-                await fetch(API_URL + '/reserve', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        name: name,
-                        phone: 'Local/Admin', // Mark as admin booking
-                        email: '',
-                        date: date,
-                        time: time,
-                        pax: parseInt(pax),
-                        forceTableId: currentSelectedTable
-                    })
-                });
+            closeBookingModal();
+            refreshDashboard();
 
-                closeBookingModal();
-                refreshDashboard();
-
-            } catch (e) {
-                console.error(e);
-                alert("Error creando reserva: " + e.message);
-            }
+        } catch (e) {
+            console.error(e);
+            alert("Error creando reserva: " + e.message);
+        }
         }
 
         async function toggleTable(tableId, currentBooking) {
