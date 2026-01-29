@@ -127,7 +127,7 @@ function renderMenu() {
             <div class="grid grid-cols-1 md:grid-cols-2">
                  <!-- Ingredients -->
                  <div class="p-6 md:p-8">
-                     <div class="grid grid-cols-2 gap-x-2 gap-y-1 text-xs md:text-sm text-gray-900 font-bold uppercase">
+                     <div class="grid grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-1 text-xs md:text-sm text-gray-900 font-bold uppercase">
                         <span>Anchoas</span><span>Ceb. Caramelizada</span>
                         <span>Nata</span><span>Jamón York</span>
                         <span>Pimiento</span><span>Salsa Barbacoa</span>
