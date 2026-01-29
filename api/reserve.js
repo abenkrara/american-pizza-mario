@@ -25,12 +25,10 @@ module.exports = async (req, res) => {
         // --- 1. TABLE ASSIGNMENT LOGIC ---
         const { data: slotBookings } = await supabase
             .from('bookings')
-            .select('*') // Changed to select * to be safe with column names
+            .select('*')
             .eq('date', newBooking.date)
             .eq('time', newBooking.time);
 
-        // Map correctly based on column name (tableId vs table_id)
-        // Note: The schema created uses "tableId" (camelCase) based on previous SQL
         const occupiedTables = slotBookings ? slotBookings.map(b => b.tableId || b.table_id) : [];
         let assignedTable = null;
 
@@ -61,7 +59,7 @@ module.exports = async (req, res) => {
             date: newBooking.date,
             time: newBooking.time,
             pax: parseInt(newBooking.pax || 2),
-            tableId: assignedTable // Matching Schema
+            tableId: assignedTable
         };
 
         const { data, error } = await supabase
@@ -77,34 +75,21 @@ module.exports = async (req, res) => {
         if (savedBooking.email && savedBooking.email.includes('@')) {
              try {
                 // Email to Client
+                const clientHtml = '<h1>Reserva Confirmada</h1><p>Hola ' + savedBooking.name + ', mesa ' + savedBooking.tableId + '</p>';
                 await transporter.sendMail({
                     from: '"American Pizza Mario" <ayubbenkrara82@gmail.com>',
                     to: savedBooking.email,
-                    subject: 'Confirmación de Reserva 🍕',
-                    html: 
-                        <h1>¡Reserva Confirmada! 🍕</h1>
-                        <p>Hola <strong></strong>, te esperamos en American Pizza Mario.</p>
-                        <ul>
-                            <li>Fecha: </li>
-                            <li>Hora: </li>
-                            <li>Personas: </li>
-                            <li>Mesa: </li>
-                        </ul>
-                    
+                    subject: 'Confirmación de Reserva',
+                    html: clientHtml
                 });
 
                 // Email to Owner
+                const ownerHtml = '<h2>Nueva Reserva</h2><p>Mesa: ' + savedBooking.tableId + '</p><p>Cliente: ' + savedBooking.name + '</p>';
                 await transporter.sendMail({
                     from: '"Sistema APM" <ayubbenkrara82@gmail.com>',
                     to: OWNER_EMAIL,
-                    subject: Nueva Reserva (Mesa ),
-                    html: 
-                        <h2>Nueva Reserva Confirmada</h2>
-                        <p><strong>Mesa:</strong> </p>
-                        <p><strong>Cliente:</strong> </p>
-                        <p><strong>Pax:</strong> </p>
-                        <p><strong>Fecha:</strong>  a las </p>
-                    
+                    subject: 'Nueva Reserva (Mesa ' + savedBooking.tableId + ')',
+                    html: ownerHtml
                 });
             } catch (emailError) {
                 console.error("Error sending emails:", emailError);

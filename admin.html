@@ -57,8 +57,7 @@
             <div class="max-w-7xl mx-auto flex justify-between items-center">
                 <div class="flex items-center">
                     <span class="font-bold text-xl uppercase tracking-wider">APM Admin</span>
-                    <span class="ml-4 bg-yellow-500 text-white px-2 py-0.5 rounded text-xs">VERSIÓN 3.7 (LOGIN
-                        FIXED)</span>
+                    <span class="ml-4 bg-green-600 text-white px-2 py-0.5 rounded text-xs">VERSIÓN 3.8 (FINAL)</span>
                 </div>
                 <div class="flex items-center gap-4">
                     <span id="connection-status" class="text-xs bg-green-500 px-2 py-1 rounded hidden">Conectado</span>
@@ -67,69 +66,55 @@
             </div>
         </nav>
 
-        <!-- SKIPPING LINES FOR BREVITY IN REPLACEMENT, targeting the function below -->
+        <select id="admin-time" class="w-full border p-2 rounded" onchange="refreshDashboard()">
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+            <option value="18:30">18:30</option>
+            <option value="19:00">19:00</option>
+            <option value="19:30">19:30</option>
+            <option value="20:00">20:00</option>
+            <option value="20:30">20:30</option>
+            <option value="21:00">21:00</option>
+            <option value="21:30">21:30</option>
+            <option value="22:00">22:00</option>
+            <option value="22:30">22:30</option>
+            <option value="23:00">23:00</option>
+        </select>
+    </div>
+    <button onclick="refreshDashboard()" class="bg-usa-blue text-white px-6 py-2 rounded font-bold hover:bg-gray-800">
+        <i class="fas fa-sync"></i> Refrescar
+    </button>
+    </div>
 
+    <!-- GESTIÓN VISUAL DE MESAS -->
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Estado de Mesas (Tiempo Real)</h2>
 
+    <!-- Grid Container Directo -->
+    <div id="tables-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12"></div>
 
-
-        <!-- CONTROLES DE FECHA Y HORA -->
-        <div class="bg-white p-6 rounded-xl shadow-md mb-8 flex flex-col md:flex-row gap-6 items-end">
-            <div class="flex-1 w-full">
-                <label class="block text-gray-700 font-bold mb-2">Fecha Gestión</label>
-                <input type="date" id="admin-date" class="w-full border p-2 rounded" onchange="refreshDashboard()">
-            </div>
-            <div class="flex-1 w-full">
-                <label class="block text-gray-700 font-bold mb-2">Turno / Hora</label>
-                <select id="admin-time" class="w-full border p-2 rounded" onchange="refreshDashboard()">
-                    <option value="17:30">17:30</option>
-                    <option value="18:00">18:00</option>
-                    <option value="18:30">18:30</option>
-                    <option value="19:00">19:00</option>
-                    <option value="19:30">19:30</option>
-                    <option value="20:00">20:00</option>
-                    <option value="20:30">20:30</option>
-                    <option value="21:00">21:00</option>
-                    <option value="21:30">21:30</option>
-                    <option value="22:00">22:00</option>
-                    <option value="22:30">22:30</option>
-                    <option value="23:00">23:00</option>
-                </select>
-            </div>
-            <button onclick="refreshDashboard()"
-                class="bg-usa-blue text-white px-6 py-2 rounded font-bold hover:bg-gray-800">
-                <i class="fas fa-sync"></i> Refrescar
-            </button>
-        </div>
-
-        <!-- GESTIÓN VISUAL DE MESAS -->
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Estado de Mesas (Tiempo Real)</h2>
-
-        <!-- Grid Container Directo -->
-        <div id="tables-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12"></div>
-
-        <!-- LISTADO DETALLADO -->
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Listado de Reservas</h2>
-        <div class="bg-white rounded-lg shadow overflow-hidden">
-            <table class="min-w-full leading-normal">
-                <thead>
-                    <tr>
-                        <th
-                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Mesa</th>
-                        <th
-                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Cliente</th>
-                        <th
-                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Pax</th>
-                        <th
-                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="bookings-table-body"></tbody>
-            </table>
-        </div>
+    <!-- LISTADO DETALLADO -->
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Listado de Reservas</h2>
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <table class="min-w-full leading-normal">
+            <thead>
+                <tr>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Mesa</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Cliente</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Pax</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="bookings-table-body"></tbody>
+        </table>
+    </div>
     </div>
     </div>
 
@@ -257,6 +242,53 @@
         function closeBookingModal() {
             document.getElementById('booking-modal').classList.add('hidden');
             currentSelectedTable = null;
+        }
+
+        async function confirmBooking() {
+            const name = document.getElementById('booking-name').value;
+            const pax = document.getElementById('booking-pax').value;
+            const date = document.getElementById('admin-date').value;
+            const time = document.getElementById('admin-time').value;
+
+            if (!name) {
+                alert("Por favor, introduce un nombre.");
+                return;
+            }
+
+            try {
+                // Determine API URL (local vs prod)
+                const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                    ? '/api'
+                    : '/api';
+
+                const res = await fetch(apiUrl + '/reserve', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: name,
+                        phone: 'Local/Admin',
+                        email: '',
+                        date: date,
+                        time: time,
+                        pax: parseInt(pax),
+                        forceTableId: currentSelectedTable
+                    })
+                });
+
+                const result = await res.json();
+
+                if (!res.ok || !result.success) {
+                    throw new Error(result.message || "Error del servidor");
+                }
+
+                closeBookingModal();
+                refreshDashboard();
+                alert("Reserva guardada correctamente");
+
+            } catch (e) {
+                console.error(e);
+                alert("Error al guardar reserva: " + e.message);
+            }
         }
 
         async function confirmBooking() {
