@@ -176,7 +176,6 @@ function renderMenu() {
         <div class="text-center group">
             <h3 class="font-display font-bold text-gray-900 uppercase text-xl mb-1 group-hover:text-usa-red transition">${item.name}</h3>
             <p class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-2">${item.ingredients}</p>
-            <span class="inline-block bg-usa-blue text-white text-xs font-bold px-2 py-1 rounded uppercase">Consultar</span>
         </div>`;
     });
 
