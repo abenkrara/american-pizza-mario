@@ -156,7 +156,10 @@
             try {
                 const res = await fetch(API_URL + '/bookings');
 
-                if (!res.ok) throw new Error("Server response not ok");
+                if (!res.ok) {
+                    const err = await res.json().catch(() => ({}));
+                    throw new Error(err.error || `Error ${res.status}: ${res.statusText}`);
+                }
 
                 const allBookings = await res.json();
 
