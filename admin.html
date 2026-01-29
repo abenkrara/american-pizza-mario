@@ -308,34 +308,7 @@
             }
         }
 
-        if (!name) {
-            alert("Por favor, introduce un nombre.");
-            return;
-        }
 
-        try {
-            await fetch(API_URL + '/reserve', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: name,
-                    phone: 'Local/Admin', // Mark as admin booking
-                    email: '',
-                    date: date,
-                    time: time,
-                    pax: parseInt(pax),
-                    forceTableId: currentSelectedTable
-                })
-            });
-
-            closeBookingModal();
-            refreshDashboard();
-
-        } catch (e) {
-            console.error(e);
-            alert("Error creando reserva: " + e.message);
-        }
-        }
 
         async function toggleTable(tableId, currentBooking) {
             const date = document.getElementById('admin-date').value;
