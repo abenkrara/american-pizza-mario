@@ -69,7 +69,7 @@ function renderMenu() {
         </div>
 
         <!-- TABLE HEADER -->
-        <div class="grid grid-cols-[1fr_auto_auto] border-b-2 border-gray-900 bg-gray-200">
+        <div class="grid grid-cols-[1fr_auto_auto] border-b-2 border-gray-900 bg-gray-800">
             <div class="p-2 md:p-3"></div>
             <div class="bg-gray-800 text-white font-bold p-2 w-20 md:w-32 text-center border-l-2 border-white flex flex-col justify-center">
                 <span class="uppercase text-xs md:text-sm tracking-wide">Porción</span>
