@@ -23,6 +23,34 @@
         </div>
     </div>
 
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 bg-gray-900/90 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full">
+            <h2 id="booking-modal-title" class="text-2xl font-bold mb-6 text-gray-800 text-center">Nueva Reserva</h2>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 font-bold mb-1">Nombre Cliente</label>
+                    <input type="text" id="booking-name" placeholder="Ej: Juan Pérez"
+                        class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-bold mb-1">Nº Personas</label>
+                    <input type="number" id="booking-pax" value="2" min="1" max="12"
+                        class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900 outline-none">
+                </div>
+            </div>
+
+            <div class="mt-8 flex gap-3">
+                <button onclick="closeBookingModal()"
+                    class="flex-1 bg-gray-300 text-gray-800 font-bold py-2 rounded hover:bg-gray-400 transition">Cancelar</button>
+                <button onclick="confirmBooking()"
+                    class="flex-1 bg-usa-blue text-white font-bold py-2 rounded hover:bg-blue-800 transition">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Dashboard Content -->
     <div id="dashboard" class="hidden">
         <nav class="bg-blue-900 text-white p-4 shadow-lg sticky top-0 z-50">
@@ -206,6 +234,57 @@
             });
         }
 
+        let currentSelectedTable = null;
+
+        function openBookingModal(tableId) {
+            currentSelectedTable = tableId;
+            document.getElementById('booking-modal-title').textContent = `Nueva Reserva - Mesa ${tableId}`;
+            document.getElementById('booking-name').value = '';
+            document.getElementById('booking-pax').value = '2';
+            document.getElementById('booking-modal').classList.remove('hidden');
+            document.getElementById('booking-name').focus();
+        }
+
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+            currentSelectedTable = null;
+        }
+
+        async function confirmBooking() {
+            const name = document.getElementById('booking-name').value;
+            const pax = document.getElementById('booking-pax').value;
+            const date = document.getElementById('admin-date').value;
+            const time = document.getElementById('admin-time').value;
+
+            if (!name) {
+                alert("Por favor, introduce un nombre.");
+                return;
+            }
+
+            try {
+                await fetch(API_URL + '/reserve', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: name,
+                        phone: 'Local/Admin', // Mark as admin booking
+                        email: '',
+                        date: date,
+                        time: time,
+                        pax: parseInt(pax),
+                        forceTableId: currentSelectedTable
+                    })
+                });
+
+                closeBookingModal();
+                refreshDashboard();
+
+            } catch (e) {
+                console.error(e);
+                alert("Error creando reserva: " + e.message);
+            }
+        }
+
         async function toggleTable(tableId, currentBooking) {
             const date = document.getElementById('admin-date').value;
             const time = document.getElementById('admin-time').value;
@@ -221,24 +300,8 @@
                     await cancelBooking(currentBooking.id);
                 }
             } else {
-                // Table is free -> Occupy it (Walk-in / Block)
-                const name = prompt(`Bloquear Mesa ${tableId} para cliente de paso:`, "Walk-in");
-                if (name) {
-                    await fetch(API_URL + '/reserve', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            name: name,
-                            phone: 'Local',
-                            email: '', // No email for walk-ins
-                            date: date,
-                            time: time,
-                            pax: 4, // Default
-                            forceTableId: tableId // KEY: Assign specific table
-                        })
-                    });
-                    refreshDashboard();
-                }
+                // Table is free -> Open Modal
+                openBookingModal(tableId);
             }
         }
 
