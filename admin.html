@@ -57,7 +57,7 @@
             <div class="max-w-7xl mx-auto flex justify-between items-center">
                 <div class="flex items-center">
                     <span class="font-bold text-xl uppercase tracking-wider">APM Admin</span>
-                    <span class="ml-4 bg-blue-600 text-white px-2 py-0.5 rounded text-xs">VERSIÓN 3.4 (CJS)</span>
+                    <span class="ml-4 bg-green-600 text-white px-2 py-0.5 rounded text-xs">ONLINE</span>
                 </div>
                 <div class="flex items-center gap-4">
                     <span id="connection-status" class="text-xs bg-green-500 px-2 py-1 rounded hidden">Conectado</span>
@@ -174,21 +174,7 @@
             } catch (e) {
                 console.error("Error fetching bookings:", e);
                 document.getElementById('connection-status').classList.add('hidden');
-
-                // Diagnóstico "Anti-Crash"
-                let debugMsg = "";
-                try {
-                    const debugRes = await fetch(API_URL.replace('/bookings', '/debug'));
-                    if (debugRes.ok) {
-                        const d = await debugRes.json();
-                        debugMsg = `\n\n--- DIAGNÓSTICO ---\nENV VARS: ${d.env.url_set ? 'OK' : 'FALTAN'} / ${d.env.key_set ? 'OK' : 'FALTAN'}\nLIBRERÍA: ${d.modules.supabase_loaded ? 'OK' : 'NO INSTALADA (' + d.modules.error + ')'}\nDB CHECK: ${d.connection.success ? 'CONEXIÓN OK' : 'FALLO'}`;
-                    } else {
-                        // Si falla aquí, es que ni el código básico de JS funciona
-                        debugMsg = "\n\n(El diagnóstico murió totalmente - Error Crítico de Node.js)";
-                    }
-                } catch (d) { debugMsg = "\n\n(Error de red al intentar diagnóstico)"; }
-
-                alert(`Error del Sistema: ${e.message}${debugMsg}\n\nEnvía captura de esto.`);
+                alert(`Error conectando con servidor: ${e.message}\n\nSi el problema persiste, revisa que el servidor esté online.`);
             }
         }
 
