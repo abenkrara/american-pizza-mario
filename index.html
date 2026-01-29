@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>American Pizza Mario | Chiva & Cheste</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'usa-red': '#B22234',
+                        'usa-blue': '#3C3B6E',
+                        'cheese-yellow': '#FFD700',
+                    },
+                    fontFamily: {
+                        'display': ['Anton', 'sans-serif'],
+                        'body': ['Open Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-pattern {
+            background-color: #3C3B6E;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B22234' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+
+<body class="font-body text-gray-800 bg-white">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
+                        <!-- Logo -->
+                        <img class="h-12 w-auto" src="assets/images/logo.png" alt="American Pizza Mario Logo"
+                            onerror="this.src='https://placehold.co/100x50?text=Mario'">
+                        <span class="font-display text-2xl text-usa-red tracking-wider uppercase">American Pizza
+                            Mario</span>
+                    </a>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html"
+                        class="text-usa-blue hover:text-usa-red font-bold uppercase transition border-b-2 border-usa-red">Inicio</a>
+                    <a href="menu.html" class="text-gray-700 hover:text-usa-red font-bold uppercase transition">La
+                        Carta</a>
+                    <a href="locations.html"
+                        class="text-gray-700 hover:text-usa-red font-bold uppercase transition">Locales</a>
+                    <a href="reservas.html"
+                        class="bg-usa-red text-white px-5 py-2 rounded-full font-bold hover:bg-red-700 transition shadow-md transform hover:scale-105">
+                        Reservar Mesa (Chiva)
+                    </a>
+                </div>
+                <!-- Mobile button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-700 hover:text-usa-red focus:outline-none"
+                        onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
+            <a href="index.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 font-bold">Inicio</a>
+            <a href="menu.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 font-bold">La Carta</a>
+            <a href="locations.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 font-bold">Locales</a>
+            <a href="reservas.html" class="block py-3 px-4 text-usa-red font-bold hover:bg-gray-100">Reservar Mesa</a>
+        </div>
+    </nav>
+
+    <!-- 1. HERO SECTION (IMPACTANTE & SENSORIAL) -->
+    <div class="relative pt-24 pb-16 md:pt-32 md:pb-32 flex items-center min-h-[90vh] overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="assets/images/hero_bg.png" alt="American Pizza Mario Fachada" class="w-full h-full object-cover">
+            <!-- Stronger gradient for redness/readability -->
+            <div class="absolute inset-0 bg-gradient-to-r from-usa-blue/95 via-usa-blue/80 to-transparent"></div>
+        </div>
+
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+            <!-- Hero Text Content -->
+            <div class="text-white space-y-6 md:space-y-8 text-center lg:text-left">
+                <div class="inline-block lg:border-l-4 lg:border-usa-red lg:pl-4">
+                    <span
+                        class="text-usa-red font-extrabold tracking-widest uppercase text-xs md:text-sm bg-white px-3 py-1 mb-3 inline-block shadow-lg">Desde
+                        1994</span>
+                    <h1
+                        class="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-none shadow-black drop-shadow-md">
+                        EL ARTE DE LA <br>
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-usa-red to-red-400 filter drop-shadow">PIZZA
+                            ARTESANA</span>
+                    </h1>
+                </div>
+
+                <!-- TEXTO ELIMINADO SEGÚN SOLICITUD -->
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
+                    <button onclick="document.getElementById('call-modal').classList.remove('hidden')"
+                        class="bg-usa-red text-white px-6 py-4 md:px-8 md:py-5 rounded-lg font-bold text-lg md:text-xl hover:bg-red-700 transition shadow-lg shadow-red-900/50 flex items-center justify-center gap-3 transform hover:-translate-y-1 group cursor-pointer w-full sm:w-auto">
+                        <i class="fas fa-phone-alt group-hover:rotate-12 transition"></i> PEDIR AHORA
+                    </button>
+                    <a href="menu.html"
+                        class="bg-white/10 border-2 border-white text-white px-6 py-4 md:px-8 md:py-5 rounded-lg font-bold text-lg md:text-xl hover:bg-white hover:text-usa-blue transition flex items-center justify-center gap-3 backdrop-blur-sm w-full sm:w-auto">
+                        <i class="fas fa-book-open"></i> VER CARTA
+                    </a>
+                </div>
+
+                <!-- Highlights / Gancho -->
+                <div class="grid grid-cols-3 gap-2 sm:gap-6 pt-8 border-t border-white/20 mt-8">
+                    <div class="text-center sm:text-left">
+                        <span class="block text-2xl md:text-4xl font-display text-yellow-400">+30</span>
+                        <span class="text-[0.65rem] sm:text-sm text-gray-300 uppercase tracking-wider font-bold">Años de
+                            Tradición</span>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <span class="block text-2xl md:text-4xl font-display text-yellow-400">100%</span>
+                        <span
+                            class="text-[0.65rem] sm:text-sm text-gray-300 uppercase tracking-wider font-bold">Ingredientes
+                            Frescos</span>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <span class="block text-2xl md:text-4xl font-display text-yellow-400"><i
+                                class="fas fa-fire"></i></span>
+                        <span class="text-[0.65rem] sm:text-sm text-gray-300 uppercase tracking-wider font-bold">Horno
+                            de Piedra</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optional: Could be empty to let background show, or hold a floating element. Kept clean for now. -->
+            <div class="hidden lg:block relative">
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. FEATURES / SERVICIOS -->
+    <section
+        class="py-16 bg-white relative z-20 mx-4 md:mx-auto max-w-7xl -mt-10 rounded-t-3xl shadow-2xl border-b border-gray-100">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-8 text-center">
+            <div
+                class="p-8 transition hover:bg-gray-50 rounded-2xl group border border-transparent hover:border-gray-200">
+                <div
+                    class="w-20 h-20 bg-usa-blue text-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl shadow-xl group-hover:scale-110 transition duration-300">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h3 class="text-2xl font-display font-bold mb-3 text-usa-blue">Para llevar</h3>
+                <p class="text-gray-600 leading-relaxed">Haz tu pedido por teléfono y pasa a recogerlo. ¡Recién salida
+                    del horno para ti!</p>
+            </div>
+            <div
+                class="p-8 transition hover:bg-gray-50 rounded-2xl group border border-transparent hover:border-gray-200">
+                <div
+                    class="w-20 h-20 bg-usa-red text-white rounded-full flex items-center justify-center mx-auto mb-6 text-3xl shadow-xl group-hover:scale-110 transition duration-300">
+                    <i class="fas fa-chair"></i>
+                </div>
+                <h3 class="text-2xl font-display font-bold mb-3 text-usa-blue">Reserva en Chiva</h3>
+                <p class="text-gray-600 leading-relaxed">Asegura tu mesa en nuestro restaurante de Chiva. Ambiente
+                    familiar y acogedor.</p>
+            </div>
+            <div
+                class="p-8 transition hover:bg-gray-50 rounded-2xl group border border-transparent hover:border-gray-200">
+                <div
+                    class="w-20 h-20 bg-yellow-400 text-black rounded-full flex items-center justify-center mx-auto mb-6 text-3xl shadow-xl group-hover:scale-110 transition duration-300">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <h3 class="text-2xl font-display font-bold mb-3 text-usa-blue">Calidad Suprema</h3>
+                <p class="text-gray-600 leading-relaxed">Selección rigurosa de ingredientes. El secreto está en nuestra
+                    pasión.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. NUESTRA CARTA (VISUAL FOCUS) -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span
+                    class="text-usa-red font-bold tracking-widest uppercase bg-white px-4 py-1 rounded shadow-sm">Descubre
+                    Sabor</span>
+                <h2 class="text-5xl md:text-6xl font-display text-usa-blue mt-4">Nuestra Carta</h2>
+                <div class="w-32 h-2 bg-usa-red mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="relative max-w-5xl mx-auto group">
+                <!-- Glow Effect -->
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-usa-blue via-usa-red to-usa-blue rounded-2xl opacity-30 blur-xl group-hover:opacity-50 transition duration-700">
+                </div>
+
+                <div class="relative bg-white rounded-xl shadow-2xl overflow-hidden border-8 border-white">
+                    <img src="assets/images/menu_display.png" alt="Mostrador de Pizzas American Mario"
+                        class="w-full h-auto object-cover transform group-hover:scale-105 transition duration-700 filter saturate-110">
+
+                    <!-- Overlay Caption -->
+                    <div
+                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-10 text-white flex flex-col items-center">
+                        <p class="font-bold text-2xl mb-4 text-center">Variedad diaria y cortes al momento</p>
+                        <a href="menu.html"
+                            class="bg-yellow-400 text-black px-8 py-3 rounded-full font-bold uppercase tracking-wider text-base hover:bg-white hover:text-usa-red transition shadow-lg transform hover:-translate-y-1">
+                            Ver Menú Completo <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. LOCATION BLOCK: CHIVA & CHESTE -->
+    <section class="bg-usa-blue py-20 text-white relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <i
+            class="fas fa-pizza-slice absolute top-10 right-10 text-[15rem] text-white opacity-5 transform rotate-12"></i>
+        <i
+            class="fas fa-map-marker-alt absolute bottom-10 left-10 text-[15rem] text-white opacity-5 transform -rotate-12"></i>
+
+        <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+            <h2 class="text-5xl md:text-6xl font-display mb-12 drop-shadow-lg">
+                Nuestros <span
+                    class="text-usa-red bg-white px-4 rounded transform -skew-x-12 inline-block shadow-lg">Locales</span>
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- CHIVA BLOCK -->
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl relative group hover:bg-white/20 transition">
+                    <div
+                        class="absolute top-4 right-4 bg-usa-red text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">
+                        Restaurante</div>
+                    <h3 class="text-4xl font-display mb-6 text-yellow-400">CHIVA</h3>
+
+                    <div class="space-y-6 text-left">
+                        <div class="flex items-start gap-4">
+                            <i class="fas fa-clock text-2xl text-yellow-400 w-8"></i>
+                            <div>
+                                <p class="font-bold uppercase tracking-wide opacity-80 text-sm">Horario</p>
+                                <p class="text-xl font-bold">Vie - Dom: 17:30 - 23:00</p>
+                                <p class="text-sm text-yellow-400 mt-1">+ Vísperas y Festivos</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <i class="fas fa-map-marked-alt text-2xl text-yellow-400 w-8"></i>
+                            <div>
+                                <p class="font-bold uppercase tracking-wide opacity-80 text-sm">Dirección</p>
+                                <p class="text-lg">Calle Paseo Argentina, 22 b<br>46370 Chiva, Valencia</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="reservas.html"
+                        class="block w-full bg-yellow-400 text-usa-blue font-bold py-4 rounded-xl text-lg hover:bg-white hover:scale-105 transition shadow-xl uppercase tracking-widest mt-8">
+                        Reservar Mesa
+                    </a>
+                </div>
+
+                <!-- CHESTE BLOCK -->
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl relative group hover:bg-white/20 transition cursor-default">
+                    <div
+                        class="absolute top-4 right-4 bg-blue-400 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">
+                        Solo Para Llevar</div>
+                    <h3 class="text-4xl font-display mb-6 text-yellow-400">CHESTE</h3>
+
+                    <div class="space-y-6 text-left">
+                        <div class="flex items-start gap-4">
+                            <i class="fas fa-clock text-2xl text-yellow-400 w-8"></i>
+                            <div>
+                                <p class="font-bold uppercase tracking-wide opacity-80 text-sm">Horario</p>
+                                <p class="text-xl font-bold">Vie - Dom: 17:30 - 23:00</p>
+                                <p class="text-sm text-yellow-400 mt-1">+ Vísperas y Festivos</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <i class="fas fa-map-marked-alt text-2xl text-yellow-400 w-8"></i>
+                            <div>
+                                <p class="font-bold uppercase tracking-wide opacity-80 text-sm">Dirección</p>
+                                <p class="text-lg">Av. Castilla, 33<br>46380 Cheste, Valencia</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-white/5 rounded-xl p-4 text-center border border-white/10">
+                        <p class="text-sm italic opacity-80">Local exclusivo para recogida de pedidos.</p>
+                        <i class="fas fa-shopping-bag text-2xl text-yellow-400 mt-2"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="mb-6 md:mb-0">
+                    <h4 class="font-display text-2xl mb-4 text-usa-red">American Pizza Mario</h4>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-4 uppercase text-gray-300">Enlaces</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="index.html" class="hover:text-white transition">Inicio</a></li>
+                        <li><a href="menu.html" class="hover:text-white transition">Carta</a></li>
+                        <li><a href="reservas.html" class="hover:text-white transition">Reservas</a></li>
+                        <li><a href="admin.html" class="hover:text-white text-xs transition">Acceso Empleados</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-4 uppercase text-gray-300">Contacto</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="tel:+34962520846" class="hover:text-white transition"><i
+                                    class="fas fa-phone mr-2 text-usa-red"></i> +34 962 52 08 46</a></li>
+                        <li><i class="fas fa-envelope mr-2 text-usa-red"></i> cristinato76@gmail.com</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="mb-6">
+                        <h5 class="font-bold mb-4 uppercase text-gray-300">Chiva</h5>
+                        <p class="text-gray-400">Vie - Dom: 17:30 - 23:00</p>
+                        <p class="text-sm text-usa-red mt-1">+ Vísperas y Festivos</p>
+                    </div>
+                    <div>
+                        <h5 class="font-bold mb-4 uppercase text-gray-300">Cheste</h5>
+                        <p class="text-gray-400">Vie - Dom: 17:30 - 23:00</p>
+                        <p class="text-sm text-usa-red mt-1">+ Vísperas y Festivos</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm flex justify-between items-center">
+                <span>&copy; 2026 American Pizza Mario.</span>
+                <div class="space-x-4 text-lg">
+                    <a href="#" class="hover:text-usa-red transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-usa-red transition"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Call Modal -->
+    <div id="call-modal"
+        class="fixed inset-0 bg-black/90 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300">
+        <div
+            class="bg-white rounded-3xl p-8 max-w-md w-full relative text-center shadow-2xl border-4 border-usa-blue transform scale-100 transition-transform duration-300">
+            <button onclick="document.getElementById('call-modal').classList.add('hidden')"
+                class="absolute top-4 right-4 text-gray-400 hover:text-usa-red text-2xl transition">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div
+                class="w-16 h-16 bg-blue-100 text-usa-blue rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="fas fa-phone-volume"></i>
+            </div>
+
+            <h3 class="text-3xl font-display text-usa-blue mb-2">¿Dónde quieres pedir?</h3>
+            <p class="text-gray-600 mb-8 font-light">Elige tu local más cercano para llamar:</p>
+
+            <div class="space-y-4">
+                <a href="tel:+34962520846"
+                    class="group block w-full bg-white border-2 border-usa-red text-usa-red font-bold py-4 rounded-xl hover:bg-usa-red hover:text-white transition flex items-center justify-between px-6 shadow-md">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-utensils"></i>
+                        <span class="text-lg">CHIVA</span>
+                    </div>
+                    <i class="fas fa-chevron-right group-hover:translate-x-1 transition"></i>
+                </a>
+                <a href="tel:+34961781194"
+                    class="group block w-full bg-white border-2 border-usa-blue text-usa-blue font-bold py-4 rounded-xl hover:bg-usa-blue hover:text-white transition flex items-center justify-between px-6 shadow-md">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="text-lg">CHESTE</span>
+                    </div>
+                    <i class="fas fa-chevron-right group-hover:translate-x-1 transition"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

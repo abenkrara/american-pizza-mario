@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | American Pizza Mario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-gray-900 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full text-center">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Acceso Dueños</h2>
+            <input type="password" id="password-input" placeholder="Contraseña (admin)"
+                class="w-full px-4 py-2 border rounded mb-4">
+            <button onclick="checkAuth()" class="w-full bg-blue-900 text-white font-bold py-2 rounded">Entrar</button>
+            <p id="login-error" class="text-red-500 text-sm mt-2 hidden">Contraseña incorrecta</p>
+        </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div id="dashboard" class="hidden">
+        <nav class="bg-blue-900 text-white p-4 shadow-lg sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <span class="font-bold text-xl uppercase tracking-wider">APM Admin</span>
+                <div class="flex items-center gap-4">
+                    <span id="connection-status" class="text-xs bg-green-500 px-2 py-1 rounded hidden">Conectado</span>
+                    <a href="index.html" class="text-sm hover:text-gray-300">Volver a Web</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="max-w-7xl mx-auto px-4 py-8">
+
+            <!-- CONTROLES DE FECHA Y HORA -->
+            <div class="bg-white p-6 rounded-xl shadow-md mb-8 flex flex-col md:flex-row gap-6 items-end">
+                <div class="flex-1 w-full">
+                    <label class="block text-gray-700 font-bold mb-2">Fecha Gestión</label>
+                    <input type="date" id="admin-date" class="w-full border p-2 rounded" onchange="refreshDashboard()">
+                </div>
+                <div class="flex-1 w-full">
+                    <label class="block text-gray-700 font-bold mb-2">Turno / Hora</label>
+                    <select id="admin-time" class="w-full border p-2 rounded" onchange="refreshDashboard()">
+                        <option value="17:30">17:30</option>
+                        <option value="18:00">18:00</option>
+                        <option value="18:30">18:30</option>
+                        <option value="19:00">19:00</option>
+                        <option value="19:30">19:30</option>
+                        <option value="20:00">20:00</option>
+                        <option value="20:30">20:30</option>
+                        <option value="21:00">21:00</option>
+                        <option value="21:30">21:30</option>
+                        <option value="22:00">22:00</option>
+                        <option value="22:30">22:30</option>
+                        <option value="23:00">23:00</option>
+                    </select>
+                </div>
+                <button onclick="refreshDashboard()"
+                    class="bg-usa-blue text-white px-6 py-2 rounded font-bold hover:bg-gray-800">
+                    <i class="fas fa-sync"></i> Refrescar
+                </button>
+            </div>
+
+            <!-- GESTIÓN VISUAL DE MESAS -->
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Estado de Mesas (Tiempo Real)</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12">
+                <!-- Mesas generadas por JS -->
+                <div id="tables-grid" class="contents"></div>
+            </div>
+
+            <!-- LISTADO DETALLADO -->
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Listado de Reservas</h2>
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <table class="min-w-full leading-normal">
+                    <thead>
+                        <tr>
+                            <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Mesa</th>
+                            <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Cliente</th>
+                            <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Pax</th>
+                            <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookings-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        const API_URL = '/api';
+
+        // Init
+        document.getElementById('admin-date').value = new Date().toISOString().split('T')[0];
+
+        function checkAuth() {
+            const pass = document.getElementById('password-input').value;
+            if (pass === 'admin') {
+                document.getElementById('login-modal').classList.add('hidden');
+                document.getElementById('dashboard').classList.remove('hidden');
+                refreshDashboard();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+
+        let currentBookings = [];
+
+        async function refreshDashboard() {
+            const date = document.getElementById('admin-date').value;
+            const time = document.getElementById('admin-time').value;
+
+            try {
+                const res = await fetch(API_URL + '/bookings');
+
+                if (!res.ok) throw new Error("Server response not ok");
+
+                const allBookings = await res.json();
+
+                document.getElementById('connection-status').classList.remove('hidden');
+
+                // Filter for current view
+                currentBookings = allBookings.filter(b => b.date === date && b.time === time);
+
+                renderTables(currentBookings);
+                renderList(currentBookings);
+
+            } catch (e) {
+                console.error("Error fetching bookings:", e);
+                document.getElementById('connection-status').classList.add('hidden');
+                alert(`Error conectando con servidor: ${e.message}\n\nAsegúrate de estar en http://localhost:8080/admin.html`);
+            }
+        }
+
+        function renderTables(bookings) {
+            const grid = document.getElementById('tables-grid');
+            grid.innerHTML = '';
+
+            for (let i = 1; i <= 6; i++) {
+                const booking = bookings.find(b => b.tableId === i);
+                const isOccupied = !!booking;
+
+                const div = document.createElement('div');
+                div.className = `p-6 rounded-xl shadow-lg border-2 flex flex-col items-center justify-center cursor-pointer transition transform hover:scale-105 active:scale-95 h-40 relative 
+                    ${isOccupied ? 'bg-red-50 border-red-500' : 'bg-green-50 border-green-500'}`;
+
+                div.onclick = () => toggleTable(i, booking);
+
+                div.innerHTML = `
+                    <p class="font-bold text-xl mb-2 ${isOccupied ? 'text-red-700' : 'text-green-700'}">MESA ${i}</p>
+                    ${isOccupied ?
+                        `<i class="fas fa-user-lock text-3xl text-red-500 mb-2"></i>
+                         <p class="text-xs font-bold text-center text-red-600 truncate w-full px-2">${booking.name}</p>`
+                        :
+                        `<i class="fas fa-check-circle text-3xl text-green-500 mb-2"></i>
+                         <p class="text-xs font-bold text-green-600">Libre</p>`
+                    }
+                    ${isOccupied ? '<span class="absolute top-2 right-2 text-red-500 text-xs shadow-sm bg-white px-1 rounded">X</span>' : ''}
+                `;
+                grid.appendChild(div);
+            }
+        }
+
+        function renderList(bookings) {
+            const tbody = document.getElementById('bookings-table-body');
+            tbody.innerHTML = '';
+
+            if (bookings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="px-5 py-5 text-center text-gray-500">Todo libre para este turno.</td></tr>';
+                return;
+            }
+
+            bookings.forEach(b => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <span class="font-bold text-lg bg-gray-200 px-3 py-1 rounded">Mesa ${b.tableId}</span>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 font-bold">${b.name}</p>
+                        <p class="text-gray-600 text-xs">${b.phone || 'Walk-in/Admin'}</p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                         ${b.pax}
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <button onclick="cancelBooking('${b.id}')" class="bg-red-100 text-red-600 px-3 py-1 rounded hover:bg-red-200 text-xs font-bold">
+                            Liberar
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function toggleTable(tableId, currentBooking) {
+            const date = document.getElementById('admin-date').value;
+            const time = document.getElementById('admin-time').value;
+
+            if (!date || !time) {
+                alert("Selecciona fecha y hora primero");
+                return;
+            }
+
+            if (currentBooking) {
+                // Table is occupied -> Free it
+                if (confirm(`¿Liberar Mesa ${tableId}?`)) {
+                    await cancelBooking(currentBooking.id);
+                }
+            } else {
+                // Table is free -> Occupy it (Walk-in / Block)
+                const name = prompt(`Bloquear Mesa ${tableId} para cliente de paso:`, "Walk-in");
+                if (name) {
+                    await fetch(API_URL + '/reserve', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: name,
+                            phone: 'Local',
+                            email: '', // No email for walk-ins
+                            date: date,
+                            time: time,
+                            pax: 4, // Default
+                            forceTableId: tableId // KEY: Assign specific table
+                        })
+                    });
+                    refreshDashboard();
+                }
+            }
+        }
+
+        async function cancelBooking(id) {
+            try {
+                const res = await fetch(API_URL + `/bookings/${id}`, { method: 'DELETE' });
+                if (res.ok) {
+                    refreshDashboard();
+                } else {
+                    alert("Error eliminando reserva");
+                }
+            } catch (e) {
+                console.error(e);
+                alert("Error de red");
+            }
+        }
+
+    </script>
+</body>
+
+</html>

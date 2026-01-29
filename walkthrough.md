@@ -1,0 +1,34 @@
+# American Pizza Mario - Website & Sistema de Reservas
+
+## Resumen
+Una web moderna y atractiva para American Pizza Mario (Chiva y Cheste) con un sistema de reservas digital integrado.
+
+## 🚀 Cómo empezar
+Para ver la web, simplemente abre el archivo `index.html` en tu navegador.
+
+## 🔐 Panel de Administración (Dueños)
+Para ver las reservas recibidas:
+1. Abre el archivo `admin.html`.
+2. Introduce la contraseña: **`admin`**
+3. Verás una tabla con todas las reservas activas de Chiva.
+
+## 🛠 Sistema en Tiempo Real (Nuevo)
+### 1. Servidor y Base de Datos
+- **Servidor Node.js**: Gestiona toda la lógica (`server.js`) en el puerto 8080.
+- **Base de Datos**: Las reservas se guardan en un archivo `bookings.json` en el servidor. Esto permite que **todos los dispositivos vean lo mismo** en tiempo real.
+- **Emails**: Se envían notificaciones por correo tanto al cliente como al dueño.
+
+### 2. Panel de Administración (Dueños)
+- **Mesas Visuales**: Parrilla se 6 mesas con estado (Verde = Libre, Rojo = Ocupada).
+- **Bloqueo Manual**: Puedes hacer clic en una mesa para bloquearla (ej. "Cliente de Paso") y que la web no permita reservarla.
+- **Gestión Total**: Puedes ver y cancelar reservas pasadas o futuras.
+- **Acceso Directo**: Entra en `http://localhost:8080/admin.html` (Contraseña: `admin`).
+
+## ⚠️ Nota Importante sobre los Datos
+El sistema guarda las reservas en el archivo `bookings.json` en tu carpeta del proyecto.
+- **Si cierras la ventana de Antigravity o el terminal**: El servidor se detendrá y la web dejará de responder.
+- **Los datos NO se pierden**: El archivo `bookings.json` se queda guardado en tu disco duro.
+- **Para volver a arrancar**: Solo necesitas volver a ejecutar `node server.js` cuando vuelvas a abrir el proyecto.
+
+## 🔄 Actualizaciones Recientes
+- **Pie de Página**: Se ha añadido la ubicación de **Chiva** al pie de página de la página de inicio, asegurando que aparezca antes que Cheste para mayor visibilidad.

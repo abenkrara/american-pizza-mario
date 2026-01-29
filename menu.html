@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Carta | American Pizza Mario</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'usa-red': '#B22234',
+                        'usa-blue': '#3C3B6E',
+                        'cheese-yellow': '#FFD700',
+                    },
+                    fontFamily: {
+                        'display': ['Anton', 'sans-serif'],
+                        'body': ['Open Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-body text-gray-800 bg-gray-50">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
+                        <img class="h-10 w-auto" src="assets/images/logo.png" alt="Logo">
+                        <span
+                            class="font-display text-xl text-usa-red tracking-wider uppercase hidden sm:block">American
+                            Pizza Mario</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html"
+                        class="text-gray-700 hover:text-usa-red font-bold uppercase transition">Inicio</a>
+                    <a href="menu.html" class="text-usa-red font-bold uppercase transition border-b-2 border-usa-red">La
+                        Carta</a>
+                    <a href="locations.html"
+                        class="text-gray-700 hover:text-usa-red font-bold uppercase transition">Locales</a>
+                    <a href="reservas.html"
+                        class="bg-usa-red text-white px-5 py-2 rounded-full font-bold hover:bg-red-700 transition shadow-md">
+                        Reservar Mesa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="bg-usa-blue py-24 md:py-32 text-center text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/50 z-10"></div>
+        <div
+            class="absolute inset-0 z-0 bg-[url('https://images.unsplash.com/photo-1590947132387-155cc02f3212?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center">
+        </div>
+        <div class="relative z-20">
+            <h1 class="text-5xl md:text-6xl font-display mb-4">Nuestra Carta</h1>
+            <p class="text-xl font-light">Auténtico sabor americano, ingredientes frescos.</p>
+        </div>
+    </div>
+
+    <!-- Menu Content -->
+    <div class="max-w-7xl mx-auto px-4 py-16">
+
+        <!-- Toggle View -->
+        <div class="text-center mb-12">
+            <p class="mb-4 text-gray-600">¿Prefieres ver el menú original?</p>
+            <button onclick="document.getElementById('original-menu-modal').classList.remove('hidden')"
+                class="bg-gray-800 text-white px-6 py-2 rounded shadow hover:bg-black transition">
+                <i class="fas fa-image mr-2"></i> Ver Carta Escaneada
+            </button>
+        </div>
+
+        <!-- Dynamic Menu Container -->
+        <div id="menu-container">
+            <!-- Content filled by JS -->
+        </div>
+
+    </div>
+
+    <!-- Original Menu Modal -->
+    <div id="original-menu-modal" class="fixed inset-0 bg-black/90 z-[60] hidden flex items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full bg-white rounded-lg p-2 max-h-[90vh] overflow-auto">
+            <button onclick="document.getElementById('original-menu-modal').classList.add('hidden')"
+                class="absolute top-4 right-4 text-gray-800 bg-white rounded-full p-2 shadow z-10 hover:bg-gray-200">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <img src="assets/images/menu.png" alt="Carta Original" class="w-full h-auto">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 text-center">
+        <p>&copy; 2026 American Pizza Mario.</p>
+    </footer>
+
+    <script src="scripts/menu.js"></script>
+</body>
+
+</html>

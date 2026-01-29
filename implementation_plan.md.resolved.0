@@ -1,0 +1,39 @@
+# Implementation Plan - American Pizza Mario
+
+## Goal
+Build a comprehensive, feature-rich website for "American Pizza Mario" (Chiva & Cheste) including a dynamic reservation system and admin dashboard.
+
+## User Review Required
+- **Menu (Carta)**: Please provide the full menu (images or text).
+- **Branding**: Do you have a logo? Preferred colors? (Search suggests Red/White/Green or US Flag colors possibly?)
+- **Reservation Logic**: How many tables? Time slots?
+- **Tech Stack Approval**: Proposing **Next.js** (React) to handle the complex logic of reservations and the admin dashboard within a single application.
+
+## Proposed Changes
+### Project Structure (Next.js)
+- `american_pizza_mario/`
+  - `app/`:
+    - `page.tsx`: Landing page.
+    - `menu/page.tsx`: Interactive menu.
+    - `locales/page.tsx`: Info about Chiva and Cheste locations.
+    - `reservas/page.tsx`: Customer reservation form.
+    - `admin/page.tsx`: Password-protected dashboard for owners.
+  - `components/`: Reusable UI components (Navbar, Footer, PizzaCard, ReservationForm).
+  - `lib/`: Helper functions (Email sender, Database mock).
+
+### Key Features
+1.  **Dual Location Support**: Explicitly mention Chiva and Cheste.
+2.  **Digital Menu**: Categorized, mouth-watering visuals.
+3.  **Reservation Engine**:
+    -   Select Location -> Date -> Time -> Party Size.
+    -   Email confirmation triggers on success.
+4.  **Admin Panel**: Simple view for owners to see upcoming bookings.
+
+## Verification Plan
+### Automated Tests
+- linting.
+- build check.
+
+### Manual Verification
+- Test Reservation Flow: Create a booking -> Check Admin Panel -> Verify "Email" (console log or simulated).
+- Verify Mobile Responsiveness on all pages.

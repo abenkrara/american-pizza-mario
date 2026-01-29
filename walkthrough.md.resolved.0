@@ -1,0 +1,40 @@
+# American Pizza Mario - Website & Sistema de Reservas
+
+## Resumen
+Una web moderna y atractiva para American Pizza Mario (Chiva y Cheste) con un sistema de reservas digital integrado.
+
+## 🚀 Cómo empezar
+Para ver la web, simplemente abre el archivo [index.html](file:///C:/Users/ayubb/.gemini/antigravity/brain/b0073478-f584-4a7d-a354-5bb05be7a0ec/index.html) en tu navegador.
+
+## 🔐 Panel de Administración (Dueños)
+Para ver las reservas recibidas:
+1. Abre el archivo [admin.html](file:///C:/Users/ayubb/.gemini/antigravity/brain/b0073478-f584-4a7d-a354-5bb05be7a0ec/american_pizza_mario/admin.html).
+2. Introduce la contraseña: **`admin`**
+3. Verás una tabla con todas las reservas activas de Chiva.
+
+## 🛠 Características
+### 1. Sistema de Reservas (Chiva)
+- **Límite**: Configurado a **6 mesas** simultáneas para evitar overbooking.
+- **Simulación**: Al confirmar una reserva, se guarda en la memoria de tu navegador y se muestra un mensaje de "Email Enviado" al cliente.
+- **Validación**: El cliente no puede reservar si la hora ya está llena.
+
+### 2. Página de Menú (Carta)
+- Diseño atractivo con secciones de Pizzas, Tex-Mex y Postres.
+- **Botón "Ver Carta Original"**: Permite al cliente ver la imagen escaneada del menú físico.
+
+### 3. Locales
+- Información diferenciada para Chiva (Restaurante) y Cheste (Takeaway).
+- Integración visual de mapas.
+
+## Archivos del Proyecto
+| Archivo | Descripción |
+|---------|-------------|
+| [index.html](file:///C:/Users/ayubb/.gemini/antigravity/brain/b0073478-f584-4a7d-a354-5bb05be7a0ec/index.html) | Página de inicio. |
+| [menu.html](file:///C:/Users/ayubb/.gemini/antigravity/brain/b0073478-f584-4a7d-a354-5bb05be7a0ec/american_pizza_mario/menu.html) | La carta digital. |
+| [reservas.html](file:///C:/Users/ayubb/.gemini/antigravity/brain/b0073478-f584-4a7d-a354-5bb05be7a0ec/american_pizza_mario/reservas.html) | Formulario de reservas. |
+| [admin.html](file:///C:/Users/ayubb/.gemini/antigravity/brain/b0073478-f584-4a7d-a354-5bb05be7a0ec/american_pizza_mario/admin.html) | Panel de control para dueños. |
+| [locations.html](file:///C:/Users/ayubb/.gemini/antigravity/brain/b0073478-f584-4a7d-a354-5bb05be7a0ec/american_pizza_mario/locations.html) | Datos de Chiva y Cheste. |
+| `scripts/` | Lógica del sistema de reservas. |
+
+## Notas
+- Actualmente el sistema usa **Almacenamiento Local (LocalStorage)**. Esto significa que las reservas que hagas en un ordenador solo se verán en ese ordenador. Para ponerlo en Internet (hosting) y que funcione en tiempo real entre varios dispositivos, se requerirá una base de datos real (Firebase o MySQL).
