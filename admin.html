@@ -169,7 +169,7 @@
             } catch (e) {
                 console.error("Error fetching bookings:", e);
                 document.getElementById('connection-status').classList.add('hidden');
-                alert(`Error conectando con servidor: ${e.message}\n\nAsegúrate de estar en http://localhost:8080/admin.html`);
+                alert(`Error conectando con servidor: ${e.message}\n\nSi el problema persiste, revisa que el servidor esté online.`);
             }
         }
 
