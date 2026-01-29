@@ -1,6 +1,6 @@
-﻿import { supabase } from '../../lib/supabaseClient';
+﻿const { supabase } = require('../../lib/supabaseClient');
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
     if (req.method !== 'GET') {
         return res.status(405).json({ message: 'Method not allowed' });
     }
@@ -18,4 +18,4 @@ export default async function handler(req, res) {
         console.error('Error fetching bookings:', error);
         res.status(500).json({ error: error.message });
     }
-}
+};
