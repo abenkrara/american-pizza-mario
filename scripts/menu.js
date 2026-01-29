@@ -54,14 +54,14 @@ function renderMenu() {
     // ================= SECCIÓN PIZZAS =================
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white">
-        <div class="flex border-b-4 border-gray-900 h-20 md:h-24">
+        <div class="flex border-b-4 border-gray-900 h-20 md:h-24 overflow-hidden bg-usa-red">
             <!-- Blue Corner with Diagonal Cut -->
-            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
+            <div class="bg-usa-blue w-28 md:w-40 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
                 ${starPattern}
             </div>
-            <!-- Red Bar -->
-            <div class="bg-usa-red flex-grow flex items-center justify-center">
-                <h2 class="text-white text-3xl md:text-5xl font-display uppercase tracking-[0.2em] drop-shadow-md text-center">Nuestro Menú</h2>
+            <!-- Red Bar content -->
+            <div class="flex-grow flex items-center justify-center -ml-16 md:-ml-24">
+                <h2 class="text-white text-3xl md:text-5xl font-display uppercase tracking-[0.2em] drop-shadow-md text-center w-full">Nuestro Menú</h2>
             </div>
         </div>
 
@@ -108,12 +108,12 @@ function renderMenu() {
     // ================= SECCIÓN CUSTOM PIZZA =================
     html += `
     <div class="shadow-2xl border-4 border-gray-900 bg-white mt-12">
-        <div class="flex border-b-4 border-gray-900 h-20 md:h-24">
-            <div class="bg-usa-blue w-28 md:w-40 relative overflow-hidden" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
+        <div class="flex border-b-4 border-gray-900 h-20 md:h-24 overflow-hidden bg-usa-red">
+            <div class="bg-usa-blue w-28 md:w-40 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
                 ${starPattern}
             </div>
-            <div class="bg-usa-red flex-grow flex items-center justify-center">
-                <h2 class="text-white text-2xl md:text-4xl font-display uppercase tracking-widest text-center">Pizza a tu gusto</h2>
+            <div class="flex-grow flex items-center justify-center -ml-16 md:-ml-24">
+                <h2 class="text-white text-2xl md:text-4xl font-display uppercase tracking-widest text-center w-full">Pizza a tu gusto</h2>
             </div>
         </div>
 
