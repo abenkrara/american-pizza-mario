@@ -1,35 +1,35 @@
 const menuData = {
     pizzas: [
-        { name: "Mario's Pizza", ingredients: "Tomate, extra mozzarella y jamón york", portion: "2,80 €", family: "20,00 €" },
-        { name: "Harlem", ingredients: "Tomate, mozzarella, bacon, carne y morcilla de arroz", portion: "3,00 €", family: "22,00 €" },
-        { name: "Chiva's Pizza", ingredients: "Tomate, mozzarella, champiñón, chorizo ibérico y salchichas", portion: "3,00 €", family: "22,00 €" },
-        { name: "Carbonara", ingredients: "Nata, mozzarella, pimienta, pollo braseado y bacon", portion: "3,00 €", family: "22,00 €" },
-        { name: "Queens", ingredients: "Tomate, mozzarella, calabacín, pimiento y champiñón", portion: "3,00 €", family: "22,00 €" },
-        { name: "Brooklyn", ingredients: "Tomate, mozzarella, champiñón, jamón york y bacon", portion: "3,00 €", family: "22,00 €" },
-        { name: "Central Park", ingredients: "Tomate, mozzarella y combinado especial de 4 quesos", portion: "3,00 €", family: "22,00 €" },
-        { name: "Miami", ingredients: "Tomate, mozzarella, piña y jamón york", portion: "3,00 €", family: "22,00 €" },
-        { name: "Sicilian", ingredients: "Tomate frito, salsa barbacoa, peperoni, extra mozzarella y carne", portion: "3,00 €", family: "22,00 €" },
-        { name: "Manhattan", ingredients: "Tomate, mozzarella, atún, aceitunas, anchoas y tomate natural", portion: "3,00 €", family: "22,00 €" },
-        { name: "Ranchera", ingredients: "Tomate frito, bacon, salsa barbacoa, pollo braseado y cebolla caramelizada", portion: "3,00 €", family: "22,00 €" },
-        { name: "Kebab", ingredients: "Tomate, mozzarella, bacon, pollo kebab y salsa yogur", portion: "3,00 €", family: "22,00 €" },
-        { name: "Tejana", ingredients: "Barbacoa, salsa cheddar, mozzarella, carne de vacuno y cebolla caramelizada", portion: "3,00 €", family: "22,00 €" }
+        { name: "Mario's Pizza", ingredients: "Tomate, extra mozzarella y jamón york", portion: "3,00 €", family: "22,00 €" },
+        { name: "Harlem", ingredients: "Tomate, mozzarella, bacon, carne y morcilla de arroz", portion: "3,20 €", family: "24,00 €" },
+        { name: "Chiva's Pizza", ingredients: "Tomate, mozzarella, champiñón, chorizo ibérico y salchichas", portion: "3,20 €", family: "24,00 €" },
+        { name: "Carbonara", ingredients: "Nata, mozzarella, pimienta, pollo braseado y bacon", portion: "3,20 €", family: "24,00 €" },
+        { name: "Queens", ingredients: "Tomate, mozzarella, calabacín, pimiento y champiñón", portion: "3,20 €", family: "24,00 €" },
+        { name: "Brooklyn", ingredients: "Tomate, mozzarella, champiñón, jamón york y bacon", portion: "3,20 €", family: "24,00 €" },
+        { name: "Central Park", ingredients: "Tomate, mozzarella y combinado especial de 4 quesos", portion: "3,20 €", family: "24,00 €" },
+        { name: "Miami", ingredients: "Tomate, mozzarella, piña y jamón york", portion: "3,20 €", family: "24,00 €" },
+        { name: "Sicilian", ingredients: "Tomate frito, salsa barbacoa, peperoni, extra mozzarella y carne", portion: "3,20 €", family: "24,00 €" },
+        { name: "Manhattan", ingredients: "Tomate, mozzarella, atún, aceitunas, anchoas y tomate natural", portion: "3,20 €", family: "24,00 €" },
+        { name: "Ranchera", ingredients: "Tomate frito, bacon, salsa barbacoa, pollo braseado y cebolla caramelizada", portion: "3,20 €", family: "24,00 €" },
+        { name: "Kebab", ingredients: "Tomate, mozzarella, bacon, pollo kebab y salsa yogur", portion: "3,20 €", family: "24,00 €" },
+        { name: "Tejana", ingredients: "Barbacoa, salsa cheddar, mozzarella, carne de vacuno y cebolla caramelizada", portion: "3,20 €", family: "24,00 €" }
     ],
     custom: [
-        { name: "Pizza Base", ingredients: "Tomate, mozzarella y orégano", price: "18,00 €" },
-        { name: "Pizza Base + 1 Ingrediente", ingredients: "Elige tu favorito", price: "19,50 €" },
-        { name: "Pizza Base + 2 Ingredientes", ingredients: "Combina dos sabores", price: "21,00 €" },
-        { name: "Pizza Base + 3 Ingredientes", ingredients: "Para los más exigentes", price: "22,50 €" },
+        { name: "Pizza Base", ingredients: "Tomate, mozzarella y orégano", price: "20,00 €" },
+        { name: "Pizza Base + 1 Ingrediente", ingredients: "Elige tu favorito", price: "21,50 €" },
+        { name: "Pizza Base + 2 Ingredientes", ingredients: "Combina dos sabores", price: "23,00 €" },
+        { name: "Pizza Base + 3 Ingredientes", ingredients: "Para los más exigentes", price: "24,50 €" },
         { name: "Ingrediente Adicional", ingredients: "Extra", price: "1,50 €" }
     ],
     aperitivos: [
-        { name: "Aros de Cebolla", ingredients: "Crujientes y dorados" },
-        { name: "Fingers de Queso", ingredients: "Rellenos de queso fundido" },
-        { name: "Patatas De Luxe", ingredients: "Gajos de patata especiados" },
-        { name: "Nuggets de Pollo", ingredients: "Carne de pollo empanada" },
-        { name: "Alitas de Pollo", ingredients: "Sabor original o picante" },
-        { name: "Pollos Crujiente", ingredients: "Chicken tender style" },
-        { name: "Delicias de Cheddar", ingredients: "Bocaditos de queso" },
-        { name: "Flautas", ingredients: "Pechuga y Queso" }
+        { name: "Aros de Cebolla", ingredients: "Crujientes y dorados", price: "3,80 €" },
+        { name: "Fingers de Queso", ingredients: "Rellenos de queso fundido", price: "6,00 €" },
+        { name: "Patatas De Luxe", ingredients: "Gajos de patata especiados", price: "4,00 €" },
+        { name: "Nuggets de Pollo", ingredients: "Carne de pollo empanada", price: "4,00 €" },
+        { name: "Alitas de Pollo", ingredients: "Sabor original o picante", price: "5,50 €" },
+        { name: "Pollos Crujiente", ingredients: "Chicken tender style", price: "5,20 €" },
+        { name: "Delicias de Cheddar", ingredients: "Bocaditos de queso", price: "5,20 €" },
+        { name: "Flautas", ingredients: "Pechuga y Queso", price: "2,10 €" }
     ]
 };
 
@@ -66,6 +66,11 @@ function renderMenu() {
             <div class="flex-grow flex items-center justify-center -ml-12 md:-ml-24">
                 <h2 class="text-white text-3xl md:text-5xl font-display font-bold uppercase tracking-[0.15em] text-center w-full">Nuestro Menú</h2>
             </div>
+        </div>
+
+        <!-- PROMO BANNER -->
+        <div class="bg-cheese-yellow text-usa-blue font-bold text-center py-2 px-4 border-b-2 border-gray-900 text-sm md:text-lg uppercase tracking-wider animate-pulse">
+            <i class="fas fa-tag mr-2"></i> Llévate una pizza familiar y la porción te sale a 3€ <i class="fas fa-tag ml-2"></i>
         </div>
 
         <!-- TABLE HEADER -->
@@ -115,8 +120,8 @@ function renderMenu() {
             <div class="bg-usa-blue w-28 md:w-40 relative flex-shrink-0" style="clip-path: polygon(0 0, 100% 0, 40% 100%, 0 100%);">
                 ${starPattern}
             </div>
-            <div class="flex-grow flex items-center justify-center -ml-12 md:-ml-24">
-                <h2 class="text-white text-3xl md:text-5xl font-display font-bold uppercase tracking-[0.15em] text-center w-full">Pizza a tu gusto</h2>
+            <div class="flex-grow flex items-center justify-center -ml-2 md:-ml-24">
+                <h2 class="text-white text-2xl md:text-5xl font-display font-bold uppercase tracking-[0.15em] text-center w-full">Pizza a tu gusto</h2>
             </div>
         </div>
 
@@ -176,9 +181,14 @@ function renderMenu() {
 
     menuData.aperitivos.forEach(item => {
         html += `
-        <div class="group border-b border-gray-100 last:border-0 pb-2">
-            <h3 class="font-display font-bold text-gray-900 uppercase text-lg md:text-xl leading-none mb-1 group-hover:text-usa-red transition">${item.name}</h3>
-            <p class="text-xs text-gray-500 font-bold uppercase tracking-wider">${item.ingredients}</p>
+        <div class="group border-b border-gray-100 last:border-0 pb-2 flex justify-between items-end">
+            <div>
+                <h3 class="font-display font-bold text-gray-900 uppercase text-lg md:text-xl leading-none mb-1 group-hover:text-usa-red transition">${item.name}</h3>
+                <p class="text-xs text-gray-500 font-bold uppercase tracking-wider">${item.ingredients}</p>
+            </div>
+             <div class="font-display font-bold text-lg md:text-xl text-usa-red bg-gray-50 px-2 rounded">
+                ${item.price}
+            </div>
         </div>`;
     });
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -153,6 +153,78 @@
         </div>
     </div>
 
+    <!-- NEW: IMAGE CAROUSEL SECTION -->
+    <div id="image-carousel" class="relative w-full h-[500px] md:h-[800px] overflow-hidden bg-usa-blue">
+        <!-- Slides Container -->
+        <div id="carousel-slides" class="relative w-full h-full">
+            <!-- Slides injected via JS -->
+        </div>
+
+        <!-- Overlay Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-usa-blue/90 z-10"></div>
+    </div>
+
+    <script>
+        const carouselImages = [
+            { url: 'assets/images/team.jpg', text: 'Somos un equipo cercano' },
+            { url: 'assets/images/satisfaction.png', text: 'Nuestro fin es que el cliente se vaya satisfecho' },
+            { url: 'assets/images/carousel_2.png', text: 'Trabajamos con productos de calidad' },
+            { url: 'assets/images/carousel_1.png', text: 'Preparamos cada pizza al momento con mucha dedicación' },
+            { url: 'assets/images/carousel_2.png', text: 'Nuestra masa es fina y sabrosa' },
+            { url: 'assets/images/carousel_1.png', text: 'El tamaño de nuestras pizzas son de 50 cm, divididas en 8 porciones' },
+            { url: 'assets/images/sharing.jpg', text: 'Son perfectas para compartir y disfrutar en buena compañía' },
+            { url: 'assets/images/cta.jpg', text: '¡¡Ven a probarlas, no te arrepentirás!!', fit: 'contain' }
+        ];
+
+        const container = document.getElementById('carousel-slides');
+        let currentSlide = 0;
+
+        // Init Slides
+        carouselImages.forEach((slide, index) => {
+            const div = document.createElement('div');
+            div.className = `absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`;
+            div.innerHTML = `
+                <div class="w-full h-full flex items-center justify-center bg-black"><img src="${slide.url}" class="w-full h-full ${slide.fit ? `object-${slide.fit}` : `object-cover`} transition-transform duration-1000"></div>
+                <div class="absolute inset-0 flex items-center justify-center z-20">
+                    <h2 class="text-white text-3xl md:text-5xl lg:text-6xl font-display font-bold text-center px-4 drop-shadow-xl transform transition-all duration-1000 translate-y-10 opacity-0 slide-text bg-black/30 p-4 rounded-xl backdrop-blur-sm border border-white/20">
+                        ${slide.text}
+                    </h2>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+
+        // Trigger first text animation
+        setTimeout(() => {
+            const firstText = container.children[0].querySelector('.slide-text');
+            firstText.classList.remove('translate-y-10', 'opacity-0');
+        }, 500);
+
+        // Auto Cycle
+        setInterval(() => {
+            const slides = container.children;
+            const nextSlide = (currentSlide + 1) % slides.length;
+
+            // Current Slide Out
+            slides[currentSlide].classList.remove('opacity-100', 'z-10');
+            slides[currentSlide].classList.add('opacity-0', 'z-0');
+            const currentText = slides[currentSlide].querySelector('.slide-text');
+            currentText.classList.add('translate-y-10', 'opacity-0');
+
+            // Next Slide In
+            slides[nextSlide].classList.remove('opacity-0', 'z-0');
+            slides[nextSlide].classList.add('opacity-100', 'z-10');
+
+            // Animate Text with slight delay
+            setTimeout(() => {
+                const nextText = slides[nextSlide].querySelector('.slide-text');
+                nextText.classList.remove('translate-y-10', 'opacity-0');
+            }, 500);
+
+            currentSlide = nextSlide;
+        }, 5000); // 5 seconds per slide
+    </script>
+
     <!-- 2. FEATURES / SERVICIOS -->
     <section
         class="py-16 bg-white relative z-20 mx-4 md:mx-auto max-w-7xl -mt-10 rounded-t-3xl shadow-2xl border-b border-gray-100">
@@ -184,7 +256,12 @@
                     <i class="fab fa-instagram"></i>
                 </div>
                 <h3 class="text-2xl font-display font-bold mb-3 text-usa-blue">Nuestras Redes</h3>
-                <p class="text-gray-600 leading-relaxed">Síguenos en Instagram y Facebook. ¡No te pierdas nuestras
+                <p class="text-gray-600 leading-relaxed">Síguenos en <a
+                        href="https://www.instagram.com/americanpizzamario/" target="_blank"
+                        class="text-pink-600 font-bold hover:underline">Instagram</a> y <a
+                        href="https://www.facebook.com/people/American-pizza-mario/100047802791674/?sk=photos&locale=es_ES"
+                        target="_blank" class="text-blue-600 font-bold hover:underline">Facebook</a>. ¡No te pierdas
+                    nuestras
                     novedades!</p>
             </div>
         </div>
@@ -412,8 +489,10 @@
                 class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm flex justify-between items-center">
                 <span>&copy; 2026 American Pizza Mario.</span>
                 <div class="space-x-4 text-lg">
-                    <a href="#" class="hover:text-usa-red transition"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="hover:text-usa-red transition"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/americanpizzamario/" target="_blank"
+                        class="hover:text-usa-red transition"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/people/American-pizza-mario/100047802791674/?sk=photos&locale=es_ES"
+                        target="_blank" class="hover:text-usa-red transition"><i class="fab fa-facebook"></i></a>
                 </div>
             </div>
         </div>
@@ -462,3 +541,10 @@
 </body>
 
 </html>
+
+
+
+
+
+
+

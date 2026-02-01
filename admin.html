@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -7,18 +7,35 @@
     <title>Admin Dashboard | American Pizza Mario</title>
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script>
+        window.onerror = function(msg, url, line) { alert("ERROR CRITICO: " + msg + " (Linea: " + line + ")"); };
+        console.log("Admin Panel Loaded");
+        // Startup alert removed
+        // alert("Admin Panel Loaded V3"); 
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'usa-red': '#B22234', 'usa-blue': '#3C3B6E', 'cheese-yellow': '#FFD700', },
+                    fontFamily: { 'display': ['Anton', 'sans-serif'], 'body': ['Open Sans', 'sans-serif'], }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-100 min-h-screen font-body">
 
     <!-- Login Modal -->
     <div id="login-modal" class="fixed inset-0 bg-gray-900 flex items-center justify-center z-50">
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full text-center">
-            <h2 class="text-2xl font-bold mb-4 text-gray-800">Acceso Dueños</h2>
+            <h2 class="text-2xl font-bold mb-4 text-gray-800 font-display text-usa-blue tracking-wide">Acceso Dueños
+            </h2>
             <input type="password" id="password-input" placeholder="Contraseña (admin)"
                 class="w-full px-4 py-2 border rounded mb-4" onkeypress="handleEnter(event)">
-            <button onclick="checkAuth()" class="w-full bg-blue-900 text-white font-bold py-2 rounded">Entrar</button>
+            <button onclick="checkAuth()" class="w-full bg-usa-blue text-white font-bold py-2 rounded">Entrar</button>
             <p id="login-error" class="text-red-500 text-sm mt-2 hidden">Contraseña incorrecta</p>
         </div>
     </div>
@@ -26,19 +43,33 @@
     <!-- Booking Modal -->
     <div id="booking-modal" class="fixed inset-0 bg-gray-900/90 flex items-center justify-center z-50 hidden">
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full">
-            <h2 id="booking-modal-title" class="text-2xl font-bold mb-6 text-gray-800 text-center">Nueva Reserva</h2>
+            <h2 id="booking-modal-title"
+                class="text-2xl font-bold mb-6 text-usa-blue font-display text-center tracking-wide">Nueva Reserva</h2>
 
             <div class="space-y-4">
                 <div>
                     <label class="block text-gray-700 font-bold mb-1">Nombre Cliente</label>
                     <input type="text" id="booking-name" placeholder="Ej: Juan Pérez"
-                        class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900 outline-none">
+                        class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-usa-blue outline-none">
+                </div><div class="mt-4 mb-4"><label class="block text-gray-700 font-bold mb-1">Hora Reserva</label><select id="booking-time" class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-usa-blue outline-none"><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option><option>22:00</option><option>22:30</option><option>23:00</option></select></div><div class="flex gap-4">
+                    <div class="flex-1">
+                        <label class="block text-gray-700 font-bold mb-1">Teléfono <span
+                                class="text-xs font-normal text-gray-500">(Opcional)</span></label>
+                        <input type="tel" id="booking-phone" placeholder="600..."
+                            class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-usa-blue outline-none">
+                    </div>
+                    <div class="w-1/3">
+                        <label class="block text-gray-700 font-bold mb-1">Nº Pers.</label>
+                        <input type="number" id="booking-pax" value="2" min="1" max="20"
+                            class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-usa-blue outline-none">
+                    </div>
                 </div>
 
                 <div>
-                    <label class="block text-gray-700 font-bold mb-1">Nº Personas</label>
-                    <input type="number" id="booking-pax" value="2" min="1" max="12"
-                        class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-blue-900 outline-none">
+                    <label class="block text-gray-700 font-bold mb-1">Email <span
+                            class="text-xs font-normal text-gray-500">(Opcional)</span></label>
+                    <input type="email" id="booking-email" placeholder="cliente@email.com"
+                        class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-usa-blue outline-none">
                 </div>
             </div>
 
@@ -46,80 +77,139 @@
                 <button onclick="closeBookingModal()"
                     class="flex-1 bg-gray-300 text-gray-800 font-bold py-2 rounded hover:bg-gray-400 transition">Cancelar</button>
                 <button onclick="confirmBooking()"
-                    class="flex-1 bg-blue-700 text-white font-bold py-2 rounded hover:bg-blue-800 transition shadow-md">Confirmar</button>
+                    class="flex-1 bg-usa-blue text-white font-bold py-2 rounded hover:bg-blue-800 transition shadow-md">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Config Modal -->
+    <div id="config-modal" class="fixed inset-0 bg-gray-900/90 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full">
+            <h2 class="text-2xl font-bold mb-6 text-usa-blue font-display text-center tracking-wide">Configuración
+                Terraza</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 font-bold mb-1">Total Sillas Disponibles</label>
+                    <input type="number" id="config-total-chairs" min="1" max="200"
+                        class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-usa-blue outline-none">
+                    <p class="text-xs text-gray-500 mt-1">Define el aforo máximo de la terraza.</p>
+                </div>
+            </div>
+            <div class="mt-8 flex gap-3">
+                <button onclick="closeConfigModal()"
+                    class="flex-1 bg-gray-300 text-gray-800 font-bold py-2 rounded hover:bg-gray-400 transition">Cancelar</button>
+                <button onclick="saveConfig()"
+                    class="flex-1 bg-usa-blue text-white font-bold py-2 rounded hover:bg-blue-800 transition shadow-md">Guardar</button>
             </div>
         </div>
     </div>
 
     <!-- Dashboard Content -->
     <div id="dashboard" class="hidden">
-        <nav class="bg-blue-900 text-white p-4 shadow-lg sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <div class="flex items-center">
-                    <span class="font-bold text-xl uppercase tracking-wider">APM Admin</span>
-                    <span class="ml-4 bg-purple-600 text-white px-2 py-0.5 rounded text-xs">VERSIÓN 3.9
-                        (REPAIRED)</span>
+        <!-- New Branded Navbar -->
+        <nav class="bg-white shadow-lg sticky top-0 z-50 border-t-4 border-usa-red">
+            <div
+                class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center px-4 py-2 gap-4 sm:gap-0">
+
+                <!-- Logo & Brand Area -->
+                <div class="flex items-center w-full sm:w-auto justify-between sm:justify-start">
+                    <div class="flex items-center gap-3">
+                        <img src="assets/images/logo.png" alt="APM Logo" class="h-10 w-auto">
+                        <span class="font-display text-xl sm:text-2xl text-usa-red tracking-wider uppercase">American
+                            Pizza Mario</span>
+                    </div>
+
+                    <!-- Mobile Controls Group (Right aligned on mobile) -->
+                    <div class="sm:hidden flex items-center gap-3">
+                        <span id="connection-status-mobile"
+                            class="text-xs bg-green-500 text-white px-2 py-1 rounded hidden">OK</span>
+                        <a href="index.html" class="text-gray-600 hover:text-usa-red text-lg">
+                            <i class="fas fa-home"></i>
+                        </a>
+                        <button onclick="openConfigModal()"
+                            class="bg-cheese-yellow text-usa-blue px-3 py-1 rounded text-xs font-bold hover:bg-yellow-400 transition shadow-sm">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <span id="connection-status" class="text-xs bg-green-500 px-2 py-1 rounded hidden">Conectado</span>
-                    <a href="index.html" class="text-sm hover:text-gray-300">Volver a Web</a>
+
+                <!-- Desktop Controls -->
+                <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                    <span id="connection-status"
+                        class="text-xs bg-green-500 text-white px-2 py-1 rounded hidden sm:inline-block">Conectado</span>
+                    <span id="loading-indicator"
+                        class="text-xs bg-cheese-yellow text-usa-blue px-2 py-1 rounded hidden"><i
+                            class="fas fa-spinner fa-spin"></i></span>
+
+                    <!-- New Reservation Button -->
+                    <button onclick="openBookingModal()"
+                        class="bg-green-600 text-white px-4 py-2 rounded-full font-bold hover:bg-green-700 transition shadow-md text-sm whitespace-nowrap uppercase tracking-wide">
+                        <i class="fas fa-plus mr-1"></i> Reserva
+                    </button>
+
+                    <a href="index.html"
+                        class="text-sm font-bold text-gray-600 hover:text-usa-red whitespace-nowrap hidden sm:block uppercase">Volver
+                        a Web</a>
+
+                    <!-- Desktop Config Button -->
+                    <button onclick="openConfigModal()"
+                        class="bg-cheese-yellow text-usa-blue px-3 py-1.5 rounded text-xs font-bold hover:bg-yellow-400 transition ml-2 hidden sm:block shadow-sm">
+                        <i class="fas fa-cog"></i> Config
+                    </button>
                 </div>
             </div>
         </nav>
 
-        <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="max-w-7xl mx-auto px-2 sm:px-4 py-4 sm:py-8">
 
             <!-- CONTROLES DE FECHA Y HORA -->
-            <div class="bg-white p-6 rounded-xl shadow-md mb-8 flex flex-col md:flex-row gap-6 items-end">
+            <div
+                class="bg-white p-4 sm:p-6 rounded-xl shadow-md mb-6 sm:mb-8 flex flex-col md:flex-row gap-4 sm:gap-6 items-end">
                 <div class="flex-1 w-full">
                     <label class="block text-gray-700 font-bold mb-2">Fecha Gestión</label>
                     <input type="date" id="admin-date" class="w-full border p-2 rounded" onchange="refreshDashboard()">
                 </div>
-                <div class="flex-1 w-full">
-                    <label class="block text-gray-700 font-bold mb-2">Turno / Hora</label>
-                    <select id="admin-time" class="w-full border p-2 rounded" onchange="refreshDashboard()">
-                        <option value="17:30">17:30</option>
-                        <option value="18:00">18:00</option>
-                        <option value="18:30">18:30</option>
-                        <option value="19:00">19:00</option>
-                        <option value="19:30">19:30</option>
-                        <option value="20:00">20:00</option>
-                        <option value="20:30">20:30</option>
-                        <option value="21:00">21:00</option>
-                        <option value="21:30">21:30</option>
-                        <option value="22:00">22:00</option>
-                        <option value="22:30">22:30</option>
-                        <option value="23:00">23:00</option>
-                    </select>
-                </div>
+                <div class="hidden"></div>
                 <button onclick="refreshDashboard()"
-                    class="bg-blue-900 text-white px-6 py-2 rounded font-bold hover:bg-blue-800 transition">
+                    class="bg-blue-900 text-white px-6 py-2 rounded font-bold hover:bg-blue-800 transition w-full md:w-auto">
                     <i class="fas fa-sync-alt mr-2"></i> Refrescar
                 </button>
             </div>
 
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Estado de Mesas (Tiempo Real)</h2>
-
-            <!-- GRID MESAS -->
-            <div id="tables-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
-                <!-- Se rellena con JS -->
+            <!-- STATUS BAR (AFORO) -->
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4">Estado del Aforo</h2>
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md mb-6 sm:mb-8">
+                <div class="flex flex-col sm:flex-row justify-between mb-2 gap-1 sm:gap-0">
+                    <span class="font-bold text-gray-700 text-sm sm:text-base">Máxima Ocupación: <span id="chairs-count" class="text-blue-600 text-lg sm:text-xl">0</span> / <span id="chairs-total">50</span> <span id="peak-time" class="text-xs text-gray-500 font-normal ml-1"></span></span>
+                    <span class="font-bold text-gray-700 text-sm sm:text-base hidden sm:inline">|</span>
+                    <span class="font-bold text-gray-700 text-sm sm:text-base">Total Comensales: <span id="total-pax" class="text-green-600 text-lg sm:text-xl">0</span></span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3 sm:h-4"><div id="capacity-bar" class="bg-blue-600 h-3 sm:h-4 rounded-full transition-all duration-500" style="width: 0%"></div></div>
             </div>
 
             <!-- LISTADO DETALLADO -->
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Listado de Reservas</h2>
-            <div class="bg-white rounded-lg shadow overflow-hidden">
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4">Listado de Reservas</h2>
+
+            <!-- Desktop Table View (Hidden on mobile) -->
+            <div class="hidden sm:block bg-white rounded-lg shadow overflow-hidden">
                 <table class="min-w-full leading-normal">
                     <thead>
                         <tr>
                             <th
                                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                Mesa</th>
+                                Hora</th>
                             <th
                                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                 Cliente</th>
                             <th
                                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                Pax</th>
+                                Contacto</th>
+                            <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Personas</th>
+                            <th
+                                class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Mesas</th>
                             <th
                                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                 Acciones</th>
@@ -128,11 +218,20 @@
                     <tbody id="bookings-table-body"></tbody>
                 </table>
             </div>
+
+            <!-- Mobile Card View (Visible only on mobile) -->
+            <div id="mobile-bookings-container" class="sm:hidden space-y-4">
+                <!-- Cards will be injected here via JS -->
+            </div>
         </div>
     </div>
 
     <!-- Script -->
     <script>
+        window.onerror = function(msg, url, line) { alert("ERROR CRITICO: " + msg + " (Linea: " + line + ")"); };
+        console.log("Admin Panel Loaded");
+        // Startup alert removed
+        // alert("Admin Panel Loaded V3"); 
         const API_URL = '/api';
 
         // Init
@@ -142,115 +241,290 @@
             if (e.key === 'Enter') checkAuth();
         }
 
-        function checkAuth() {
-            const pass = document.getElementById('password-input').value;
-            if (pass === 'admin') {
-                document.getElementById('login-modal').classList.add('hidden');
-                document.getElementById('dashboard').classList.remove('hidden');
-                refreshDashboard();
-            } else {
-                document.getElementById('login-error').classList.remove('hidden');
+        function checkAuth() { 
+            try {
+                const passInput = document.getElementById('password-input');
+                if(!passInput) { alert('Error: No encuentro el campo de contraseña'); return; }
+                
+                const pass = passInput.value;
+                const ADMIN_PASSWORD = 'admin';
+
+                if (pass === ADMIN_PASSWORD) {
+                    document.getElementById('login-modal').classList.add('hidden');
+                    document.getElementById('dashboard').classList.remove('hidden');
+                    refreshDashboard();
+                } else {
+                    document.getElementById('login-error').classList.remove('hidden');
+                    document.getElementById('login-error').textContent = 'Contraseña incorrecta';
+                }
+            } catch(e) {
+                alert('Error system: ' + e.message);
             }
         }
 
         let currentBookings = [];
+        let totalChairs = 100;
 
-        async function refreshDashboard() {
-            const date = document.getElementById('admin-date').value;
-            const time = document.getElementById('admin-time').value;
-
+        // Functions to interact with Config and Refresh
+        async function fetchConfig() {
             try {
-                // Use relative path for robustness
-                const res = await fetch(API_URL + '/bookings');
+                const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                    ? '/api'
+                    : '/api';
 
-                if (!res.ok) {
-                    const err = await res.json().catch(() => ({}));
-                    throw new Error(err.error || `Error ${res.status}: ${res.statusText}`);
+                const res = await fetch(apiUrl + '/config');
+                const data = await res.json();
+                if (data.success) {
+                    totalChairs = data.totalChairs;
+                    document.getElementById('chairs-total').textContent = totalChairs;
                 }
-
-                const allBookings = await res.json();
-
-                document.getElementById('connection-status').classList.remove('hidden');
-
-                // Filter for current view
-                currentBookings = allBookings.filter(b => b.date === date && b.time === time);
-
-                renderTables(currentBookings);
-                renderList(currentBookings);
-
             } catch (e) {
-                console.error("Error fetching bookings:", e);
-                document.getElementById('connection-status').classList.add('hidden');
-                alert(`Error conectando con servidor: ${e.message}\n\nSi el problema persiste, revisa que el servidor esté online.`);
+                console.error("Error loading config:", e);
             }
         }
 
-        function renderTables(bookings) {
-            const grid = document.getElementById('tables-grid');
-            grid.innerHTML = '';
-
-            for (let i = 1; i <= 6; i++) {
-                const booking = bookings.find(b => (b.tableId || b.table_id) === i);
-                const isOccupied = !!booking;
-
-                const div = document.createElement('div');
-                div.className = `p-4 rounded-xl border-2 cursor-pointer transition relative flex flex-col items-center justify-center h-32 ${isOccupied ? 'border-red-500 bg-red-50' : 'border-green-500 bg-green-50 hover:bg-green-100'}`;
-
-                div.onclick = () => toggleTable(i, booking);
-
-                div.innerHTML = `
-                    <span class="font-bold text-gray-700 mb-2 ${isOccupied ? 'text-red-700' : 'text-green-700'}">MESA ${i}</span>
-                    ${isOccupied ?
-                        `<i class="fas fa-user-check text-2xl text-red-500 mb-1"></i>
-                         <p class="text-xs font-bold text-red-600 truncate w-full text-center">${booking.name}</p>`
-                        :
-                        `<i class="fas fa-check-circle text-3xl text-green-500 mb-2"></i>
-                         <p class="text-xs font-bold text-green-600">Libre</p>`
-                    }
-                    ${isOccupied ? '<span class="absolute top-2 right-2 text-red-500 text-xs shadow-sm bg-white px-1 rounded">X</span>' : ''}
-                `;
-                grid.appendChild(div);
+        async function fetchBookings(date) {
+            try {
+                const res = await fetch(API_URL + '/bookings?date=' + date);
+                if (!res.ok) throw new Error("Error fetching bookings");
+                return await res.json();
+            } catch (e) {
+                console.error("Error fetching bookings:", e);
+                throw e;
             }
+        }
+
+        async function refreshDashboard() {
+            const date = document.getElementById('admin-date').value;
+            const time = document.getElementById('booking-time').value;
+
+            document.getElementById('loading-indicator').classList.remove('hidden');
+            document.getElementById('connection-status').classList.add('hidden');
+            document.getElementById('connection-status-mobile').classList.add('hidden');
+
+            try {
+                const [_, bookingsData] = await Promise.all([
+                    fetchConfig(),
+                    fetchBookings(date)
+                ]);
+
+                const allBookings = bookingsData || [];
+
+                // Filter for current time slot
+                currentBookings = allBookings.sort((a, b) => a.time.localeCompare(b.time));
+
+                // Update Stats
+                updateStatus(currentBookings);
+
+                // Render List
+                renderList(currentBookings);
+
+                document.getElementById('connection-status').classList.remove('hidden');
+                document.getElementById('connection-status-mobile').classList.remove('hidden');
+
+            } catch (e) {
+                alert(`Error conectando con servidor: ${e.message}`);
+            } finally {
+                document.getElementById('loading-indicator').classList.add('hidden');
+            }
+        }
+
+        function updateStatus(bookings) {
+            // 1. Calculate TOTALS
+            const totalPax = bookings.reduce((sum, b) => sum + (parseInt(b.pax) || 0), 0);
+            
+            // 2. Calculate PEAK OCCUPANCY with 70 min duration
+            const slots = {};
+            const DURATION = 70; // minutes
+
+            // Helper to add minutes to "HH:MM"
+            function addMinutes(timeStr, mins) {
+                const [h, m] = timeStr.split(":").map(Number);
+                const date = new Date();
+                date.setHours(h, m, 0, 0);
+                date.setMinutes(date.getMinutes() + mins);
+                const newH = date.getHours().toString().padStart(2, "0");
+                const newM = date.getMinutes().toString().padStart(2, "0");
+                return `${newH}:${newM}`;
+            }
+
+            // Initialize all possible slots to 0 (optional but cleaner)
+            // But we rely on dynamic keys
+            
+            bookings.forEach(b => {
+                const start = b.time; // "20:30"
+                const pax = parseInt(b.pax) || 0;
+
+                // Mark start slot
+                if (!slots[start]) slots[start] = 0;
+                slots[start] += pax;
+
+                // Mark overlap slots
+                let current = start;
+                let elapsed = 0;
+                while (elapsed < DURATION) {
+                    current = addMinutes(current, 30); 
+                    // Only count if it falls within the 70 min window
+                    // 0 -> 30 (covered) -> 60 (covered) -> 90 (not covered)
+                    // If duration is 70:
+                    // Start 20:00. 
+                    // +30 = 20:30 (Elapsed 30 < 70) -> Count
+                    // +30 = 21:00 (Elapsed 60 < 70) -> Count
+                    // +30 = 21:30 (Elapsed 90 > 70) -> Stop
+                    
+                    elapsed += 30;
+                    if (elapsed < DURATION) {
+                         if (!slots[current]) slots[current] = 0;
+                         slots[current] += pax;
+                    }
+                }
+            });
+
+            let maxOccupancy = totalPax; // Daily Total Mode
+            let peakTime = "";
+
+            // Update UI
+            document.getElementById("chairs-count").textContent = maxOccupancy;
+            document.getElementById("peak-time").textContent = "(Total Día)";
+            
+            const totalPaxEl = document.getElementById("total-pax");
+            if(totalPaxEl) totalPaxEl.textContent = totalPax;
+
+            document.getElementById("chairs-total").textContent = totalChairs;
+
+            // Bar represents PEAK occupancy vs Limit
+            const percentage = Math.min((maxOccupancy / totalChairs) * 100, 100);
+            const bar = document.getElementById("capacity-bar");
+            bar.style.width = percentage + "%";
+            if (percentage > 90) bar.className = "h-3 sm:h-4 rounded-full transition-all duration-500 bg-red-600";
+            else if (percentage > 60) bar.className = "h-3 sm:h-4 rounded-full transition-all duration-500 bg-yellow-500";
+            else bar.className = "h-3 sm:h-4 rounded-full transition-all duration-500 bg-blue-600";
+        }
+
+        // --- Config Save ---
+        async function saveConfig() {
+            const newVal = document.getElementById('config-total-chairs').value;
+            try {
+                const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                    ? '/api'
+                    : '/api';
+
+                const res = await fetch(apiUrl + '/config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ totalChairs: newVal })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    totalChairs = parseInt(newVal);
+                    closeConfigModal();
+                    refreshDashboard();
+                    alert("Configuración actualizada.");
+                } else {
+                    alert("Error: " + data.message);
+                }
+            } catch (e) {
+                console.error(e);
+                alert("Error guardando configuración.");
+            }
+        }
+
+        function openConfigModal() {
+            document.getElementById('config-total-chairs').value = totalChairs;
+            document.getElementById('config-modal').classList.remove('hidden');
+        }
+
+        function closeConfigModal() {
+            document.getElementById('config-modal').classList.add('hidden');
         }
 
         function renderList(bookings) {
             const tbody = document.getElementById('bookings-table-body');
+            const mobileContainer = document.getElementById('mobile-bookings-container');
+
             tbody.innerHTML = '';
+            mobileContainer.innerHTML = '';
 
             if (bookings.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="px-5 py-5 text-center text-gray-500">Todo libre para este turno.</td></tr>';
+                const emptyMsg = '<div class="text-center text-gray-500 py-4">No hay reservas para este día.</div>';
+                tbody.innerHTML = `<tr><td colspan="6" class="px-5 py-5 text-center text-gray-500">No hay reservas para este día.</td></tr>`;
+                mobileContainer.innerHTML = emptyMsg;
                 return;
             }
 
             bookings.forEach(b => {
+                // 1. Render Desktop Table Row
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <span class="font-bold text-lg bg-gray-200 px-3 py-1 rounded">Mesa ${b.tableId || b.table_id}</span>
+                        <span class="font-bold text-gray-700">${b.time}</span>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p class="text-gray-900 font-bold">${b.name}</p>
-                        <p class="text-gray-600 text-xs">${b.phone || 'Walk-in/Admin'}</p>
+                        <p class="text-gray-900 font-bold whitespace-nowrap">${b.name}</p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                         ${b.pax}
+                        <div class="flex flex-col gap-1">
+                            ${b.phone ?
+                        `<button onclick="sendWhatsApp('${b.phone}', '${b.name}', '${b.date}', '${b.time}')" 
+                                    class="text-green-600 hover:text-green-800 font-bold text-xs flex items-center gap-1 whitespace-nowrap">
+                                    <i class="fab fa-whatsapp"></i> ${b.phone}
+                                </button>`
+                        : '<span class="text-gray-400 text-xs">Sin tlf</span>'}
+                            <span class="text-gray-500 text-xs truncate max-w-[100px]">${b.email || '-'}</span>
+                        </div>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <button onclick="cancelBooking('${b.id}')" class="bg-red-100 text-red-600 px-3 py-1 rounded hover:bg-red-200 text-xs font-bold">
+                        <span class="font-bold text-lg bg-blue-100 text-blue-800 px-3 py-1 rounded">${b.pax}</span>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                         ${b.tablesConsumed || 1}
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <button onclick="cancelBooking('${b.id}')" class="bg-red-100 text-red-600 px-3 py-1 rounded hover:bg-red-200 text-xs font-bold whitespace-nowrap">
                             Liberar
                         </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
+
+                // 2. Render Mobile Card
+                const card = document.createElement('div');
+                card.className = 'bg-white p-4 rounded-lg shadow border-l-4 border-blue-900 relative';
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div class="pr-2 flex-1">
+                            <h3 class="font-bold text-gray-800 text-lg leading-tight mb-1">${b.name}</h3>
+                            <div class="text-sm text-gray-500 mb-3 flex items-center gap-3">
+                                 <span class="font-semibold text-gray-700 bg-gray-100 px-2 py-0.5 rounded"><i class="far fa-clock"></i> ${b.time}</span>
+                                 ${b.phone ?
+                        `<button onclick="sendWhatsApp('${b.phone}', '${b.name}', '${b.date}', '${b.time}')" class="text-green-600 font-bold text-xs flex items-center gap-1"><i class="fab fa-whatsapp text-sm"></i> WhatsApp</button>`
+                        : ''}
+                            </div>
+                            
+                            <div class="flex gap-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
+                                    <i class="fas fa-users"></i> ${b.pax} Pers.
+                                </span>
+                                <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
+                                    <i class="fas fa-chair"></i> ${b.tablesConsumed || 1} Mesa${(b.tablesConsumed || 1) > 1 ? 's' : ''}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <button onclick="cancelBooking('${b.id}')" class="bg-red-100 text-red-600 p-3 rounded-full hover:bg-red-200 shadow-sm transition-colors self-center ml-2">
+                            <i class="fas fa-trash-alt text-lg"></i>
+                        </button>
+                    </div>
+                `;
+                mobileContainer.appendChild(card);
             });
         }
 
-        let currentSelectedTable = null;
-
-        function openBookingModal(tableId) {
-            currentSelectedTable = tableId;
-            document.getElementById('booking-modal-title').textContent = `Nueva Reserva - Mesa ${tableId}`;
+        function openBookingModal() {
+            document.getElementById('booking-modal-title').textContent = `Nueva Reserva`;
             document.getElementById('booking-name').value = '';
+            document.getElementById('booking-phone').value = '';
+            document.getElementById('booking-email').value = '';
             document.getElementById('booking-pax').value = '2';
             document.getElementById('booking-modal').classList.remove('hidden');
             document.getElementById('booking-name').focus();
@@ -258,14 +532,24 @@
 
         function closeBookingModal() {
             document.getElementById('booking-modal').classList.add('hidden');
-            currentSelectedTable = null;
         }
 
         async function confirmBooking() {
+            // Validation: Check Daily Limit
+            const paxInput = document.getElementById("booking-pax").value;
+            const newPax = parseInt(paxInput) || 0;
+            const currentTotal = currentBookings.reduce((sum, b) => sum + (parseInt(b.pax) || 0), 0);
+            
+            if (currentTotal + newPax > totalChairs) {
+                alert(`IMPOSIBLE RESERVAR: El aforo diario está completo (${currentTotal}/${totalChairs}).`);
+                return;
+            }
             const name = document.getElementById('booking-name').value;
+            const phone = document.getElementById('booking-phone').value;
+            const email = document.getElementById('booking-email').value;
             const pax = document.getElementById('booking-pax').value;
             const date = document.getElementById('admin-date').value;
-            const time = document.getElementById('admin-time').value;
+            const time = document.getElementById('booking-time').value;
 
             if (!name) {
                 alert("Por favor, introduce un nombre.");
@@ -273,7 +557,6 @@
             }
 
             try {
-                // Determine API URL (local vs prod)
                 const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
                     ? '/api'
                     : '/api';
@@ -282,13 +565,9 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        name: name,
-                        phone: 'Local/Admin',
-                        email: '',
-                        date: date,
-                        time: time,
+                        name, phone, email, date, time,
                         pax: parseInt(pax),
-                        forceTableId: currentSelectedTable
+                        createdByAdmin: true
                     })
                 });
 
@@ -300,37 +579,17 @@
 
                 closeBookingModal();
                 refreshDashboard();
-                alert("Reserva guardada correctamente");
+                alert("Reserva confirmada.");
 
             } catch (e) {
                 console.error(e);
-                alert("Error al guardar reserva: " + e.message);
-            }
-        }
-
-
-
-        async function toggleTable(tableId, currentBooking) {
-            const date = document.getElementById('admin-date').value;
-            const time = document.getElementById('admin-time').value;
-
-            if (!date || !time) {
-                alert("Selecciona fecha y hora primero");
-                return;
-            }
-
-            if (currentBooking) {
-                // Table is occupied -> Free it
-                if (confirm(`¿Liberar Mesa ${tableId}?`)) {
-                    await cancelBooking(currentBooking.id);
-                }
-            } else {
-                // Table is free -> Open Modal
-                openBookingModal(tableId);
+                alert("Error: " + e.message);
             }
         }
 
         async function cancelBooking(id) {
+            if (!confirm("¿Seguro que quieres eliminar esta reserva?")) return;
+
             try {
                 const res = await fetch(API_URL + `/bookings/${id}`, { method: 'DELETE' });
                 if (res.ok) {
@@ -344,7 +603,40 @@
             }
         }
 
+        function sendWhatsApp(phone, name, date, time) {
+            let cleanPhone = phone.replace(/\D/g, '');
+            if (!cleanPhone.startsWith('34') && cleanPhone.length === 9) {
+                cleanPhone = '34' + cleanPhone;
+            }
+            const message = `Hola ${name}, confirmamos tu reserva en American Pizza Mario para el ${date} a las ${time}. ¡Te esperamos! 🍕`;
+            const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
     </script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

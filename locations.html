@@ -105,7 +105,7 @@
                         </li>
                         <li class="flex items-center text-usa-blue font-bold">
                             <i class="fas fa-utensils w-6"></i>
-                            <span>6 Mesas Disponibles</span>
+                            <span id="tablesAvailable">6 Mesas Disponibles</span>
                         </li>
                     </ul>
                     <a href="reservas.html"
@@ -164,6 +164,28 @@
         <p>&copy; 2026 American Pizza Mario.</p>
     </footer>
 
+    <script>
+        // Fetch dynamic table count from API
+        const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:8080/api'
+            : 'https://american-pizza-mario.vercel.app/api';
+
+        async function loadTableCount() {
+            try {
+                const response = await fetch(`${API_URL}/config`);
+                const data = await response.json();
+                if (data.success && data.maxTables) {
+                    document.getElementById('tablesAvailable').textContent = `${data.maxTables} Mesas Disponibles`;
+                }
+            } catch (error) {
+                console.error('Error loading table count:', error);
+                // Keep default "6 Mesas Disponibles" if fetch fails
+            }
+        }
+
+        // Load table count when page loads
+        loadTableCount();
+    </script>
 </body>
 
 </html>
