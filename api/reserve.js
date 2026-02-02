@@ -36,7 +36,7 @@ function checkRateLimit(ip) {
 }
 
 // --- TELEGRAM CONFIG ---
-const TELEGRAM_BOT_TOKEN = '8290891207:AAGz3Ur1rvxyoCyfexjo1Ad6uUIHHqctD84';
+const TELEGRAM_BOT_TOKEN = '';
 const TELEGRAM_CHAT_ID = '1424186372';
 
 async function sendTelegramNotification(booking, tables) {
