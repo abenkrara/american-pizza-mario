@@ -38,6 +38,7 @@ function checkRateLimit(ip) {
 // --- TELEGRAM CONFIG ---
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '1424186372';
+// Env vars configured for security
 
 async function sendTelegramNotification(booking, tables) {
     const message = `
